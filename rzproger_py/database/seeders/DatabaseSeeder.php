@@ -25,7 +25,7 @@ class DatabaseSeeder extends Seeder
             'password' => Hash::make('password'),
             'role' => 'admin',
         ]);
-        
+
         // Create Regular User
         User::create([
             'name' => 'Test User',
@@ -35,35 +35,15 @@ class DatabaseSeeder extends Seeder
             'address' => '123 Test St, Test City, Test Country',
             'role' => 'user',
         ]);
-        
+
         // Create Room Types
         $roomTypes = [
-            [
-                'name' => 'Standard Room',
-                'description' => 'Our Standard Room offers comfort and convenience with one queen-sized bed, a work desk, and a private bathroom. Perfect for solo travelers or couples seeking a cozy stay.',
-                'price_per_night' => 89.99,
-                'max_occupancy' => 2,
-                'amenities' => ['Free WiFi', 'TV', 'Air Conditioning', 'Desk', 'Private Bathroom'],
-            ],
-            [
-                'name' => 'Deluxe Room',
-                'description' => 'Experience enhanced comfort in our Deluxe Room featuring a king-sized bed, additional seating area, and a spacious bathroom with premium amenities. Ideal for those who desire extra space and amenities.',
-                'price_per_night' => 149.99,
-                'max_occupancy' => 3,
-                'amenities' => ['Free WiFi', 'TV', 'Air Conditioning', 'Mini Bar', 'Coffee Maker', 'Desk', 'Seating Area', 'Premium Bathroom Amenities'],
-            ],
-            [
-                'name' => 'Executive Suite',
-                'description' => 'Our luxurious Executive Suite offers separate living and sleeping areas, a king-sized bed, premium furnishings, and a lavish bathroom with a bathtub and shower. Perfect for extended stays or those seeking a truly luxurious experience.',
-                'price_per_night' => 249.99,
-                'max_occupancy' => 4,
-                'amenities' => ['Free WiFi', 'Smart TV', 'Air Conditioning', 'Mini Bar', 'Espresso Machine', 'Desk', 'Lounge Area', 'Premium Bathroom Amenities', 'Bathrobe & Slippers', 'Turndown Service'],
-            ],
+
         ];
-        
+
         foreach ($roomTypes as $roomTypeData) {
             $roomType = RoomType::create($roomTypeData);
-            
+
             // Create Rooms for each Room Type
             for ($i = 1; $i <= 5; $i++) {
                 Room::create([
@@ -73,7 +53,7 @@ class DatabaseSeeder extends Seeder
                 ]);
             }
         }
-        
+
         // Create Extra Services
         $extraServices = [
             [
@@ -97,7 +77,7 @@ class DatabaseSeeder extends Seeder
                 'price' => 79.99,
             ],
         ];
-        
+
         foreach ($extraServices as $serviceData) {
             ExtraService::create($serviceData);
         }

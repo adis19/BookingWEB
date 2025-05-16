@@ -1,12 +1,12 @@
 @extends('layouts.app')
 
-@section('title', 'About Us')
+@section('title', 'О нас')
 
 @section('hero')
 <div class="hero-section">
     <div class="container text-center">
-        <h1 class="display-4">About LuxuryStay</h1>
-        <p class="lead">Your premium accommodation provider since 2010</p>
+        <h1 class="display-4">О Люкс Отеле</h1>
+        <p class="lead">Ваш премиальный поставщик жилья с 2010 года</p>
     </div>
 </div>
 @endsection
@@ -14,10 +14,10 @@
 @section('content')
 <div class="row mb-5">
     <div class="col-md-6">
-        <h2>Our Story</h2>
-        <p>LuxuryStay was founded in 2010 with a simple yet ambitious goal: to provide guests with an unparalleled luxury accommodation experience at reasonable prices. What began as a small boutique hotel has since grown into a renowned name in the hospitality industry.</p>
-        <p>Our journey has been defined by a commitment to excellence, attention to detail, and a genuine passion for hospitality. Over the years, we've refined our services and expanded our offerings, but our core values remain unchanged.</p>
-        <p>Today, LuxuryStay stands as a testament to our dedication to creating memorable stays for our guests, combining modern amenities with timeless elegance.</p>
+        <h2>Наша история</h2>
+        <p>Люкс Отель был основан в 2010 году с простой, но амбициозной целью: предоставить гостям непревзойденный опыт проживания в роскошном отеле по разумным ценам. То, что начиналось как небольшой бутик-отель, превратилось в известное имя в индустрии гостеприимства.</p>
+        <p>Наш путь определялся стремлением к совершенству, вниманием к деталям и искренней страстью к гостеприимству. За эти годы мы усовершенствовали наши услуги и расширили наши предложения, но наши основные ценности остались неизменными.</p>
+        <p>Сегодня Люкс Отель является свидетельством нашей преданности созданию запоминающегося отдыха для наших гостей, сочетая современные удобства с неподвластной времени элегантностью.</p>
     </div>
     <div class="col-md-6">
         <img src="https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" class="img-fluid rounded" alt="Hotel image">
@@ -26,36 +26,36 @@
 
 <div class="row mb-5">
     <div class="col-md-12 text-center">
-        <h2>Our Values</h2>
-        <p class="lead mb-5">These core principles guide everything we do at LuxuryStay</p>
+        <h2>Наши ценности</h2>
+        <p class="lead mb-5">Эти основные принципы определяют всё, что мы делаем в Люкс Отеле</p>
     </div>
-    
+
     <div class="col-md-4">
         <div class="card h-100">
             <div class="card-body text-center">
                 <i class="fas fa-star text-primary mb-3" style="font-size: 3rem;"></i>
-                <h4 class="card-title">Excellence</h4>
-                <p class="card-text">We strive for excellence in every aspect of our service, from room cleanliness to customer interactions. Our high standards ensure that guests receive nothing but the best.</p>
+                <h4 class="card-title">Совершенство</h4>
+                <p class="card-text">Мы стремимся к совершенству во всех аспектах нашего сервиса, от чистоты номеров до взаимодействия с клиентами. Наши высокие стандарты гарантируют, что гости получат только лучшее.</p>
             </div>
         </div>
     </div>
-    
+
     <div class="col-md-4">
         <div class="card h-100">
             <div class="card-body text-center">
                 <i class="fas fa-heart text-primary mb-3" style="font-size: 3rem;"></i>
-                <h4 class="card-title">Hospitality</h4>
-                <p class="card-text">True hospitality means creating a warm, welcoming environment where guests feel valued and cared for. Our staff is dedicated to making your stay comfortable and memorable.</p>
+                <h4 class="card-title">Гостеприимство</h4>
+                <p class="card-text">Настоящее гостеприимство означает создание теплой, приветливой атмосферы, где гости чувствуют себя ценными и окруженными заботой. Наш персонал стремится сделать ваше пребывание комфортным и запоминающимся.</p>
             </div>
         </div>
     </div>
-    
+
     <div class="col-md-4">
         <div class="card h-100">
             <div class="card-body text-center">
                 <i class="fas fa-thumbs-up text-primary mb-3" style="font-size: 3rem;"></i>
-                <h4 class="card-title">Integrity</h4>
-                <p class="card-text">We believe in honest, transparent business practices. Our pricing is clear, our promises are kept, and we always put our guests' needs first.</p>
+                <h4 class="card-title">Честность</h4>
+                <p class="card-text">Мы верим в честную, прозрачную деловую практику. Наши цены прозрачны, наши обещания выполняются, и мы всегда ставим потребности наших гостей на первое место.</p>
             </div>
         </div>
     </div>
@@ -63,50 +63,50 @@
 
 <div class="row mb-5">
     <div class="col-md-12 text-center mb-4">
-        <h2>Meet Our Team</h2>
-        <p class="lead">The dedicated professionals who make LuxuryStay special</p>
+        <h2>Познакомьтесь с нашей командой</h2>
+        <p class="lead">Преданные профессионалы, которые делают Люкс Отель особенным</p>
     </div>
-    
+
     <div class="col-md-3">
         <div class="card text-center mb-4">
-            <img src="https://randomuser.me/api/portraits/men/32.jpg" class="card-img-top" alt="Team member">
+            <img src="https://randomuser.me/api/portraits/men/32.jpg" class="card-img-top" alt="Член команды">
             <div class="card-body">
-                <h5 class="card-title">John Doe</h5>
-                <p class="card-subtitle text-muted mb-2">General Manager</p>
-                <p class="card-text">With over 15 years in the hospitality industry, John ensures that every aspect of LuxuryStay operates smoothly.</p>
+                <h5 class="card-title">Азамат Асанов</h5>
+                <p class="card-subtitle text-muted mb-2">Генеральный менеджер</p>
+                <p class="card-text">Имея более 15 лет опыта в индустрии гостеприимства, Азамат обеспечивает бесперебойную работу каждого аспекта Люкс Отеля.</p>
             </div>
         </div>
     </div>
-    
+
     <div class="col-md-3">
         <div class="card text-center mb-4">
-            <img src="https://randomuser.me/api/portraits/women/44.jpg" class="card-img-top" alt="Team member">
+            <img src="https://randomuser.me/api/portraits/women/44.jpg" class="card-img-top" alt="Член команды">
             <div class="card-body">
-                <h5 class="card-title">Jane Smith</h5>
-                <p class="card-subtitle text-muted mb-2">Customer Relations</p>
-                <p class="card-text">Jane's friendly demeanor and attention to detail ensures that guest needs are always met with a smile.</p>
+                <h5 class="card-title">Айгуль Токтомаматова</h5>
+                <p class="card-subtitle text-muted mb-2">Отношения с клиентами</p>
+                <p class="card-text">Дружелюбный характер и внимание к деталям Айгуль гарантируют, что потребности гостей всегда встречаются с улыбкой.</p>
             </div>
         </div>
     </div>
-    
+
     <div class="col-md-3">
         <div class="card text-center mb-4">
-            <img src="https://randomuser.me/api/portraits/men/67.jpg" class="card-img-top" alt="Team member">
+            <img src="https://randomuser.me/api/portraits/men/67.jpg" class="card-img-top" alt="Член команды">
             <div class="card-body">
-                <h5 class="card-title">Robert Johnson</h5>
-                <p class="card-subtitle text-muted mb-2">Head Chef</p>
-                <p class="card-text">Robert's culinary expertise brings exquisite flavors to our dining experience, delighting guests with every meal.</p>
+                <h5 class="card-title">Бакыт Эсентаев</h5>
+                <p class="card-subtitle text-muted mb-2">Шеф-повар</p>
+                <p class="card-text">Кулинарное мастерство Бакыта привносит изысканные вкусы в наши блюда, восхищая гостей каждой трапезой.</p>
             </div>
         </div>
     </div>
-    
+
     <div class="col-md-3">
         <div class="card text-center mb-4">
-            <img src="https://randomuser.me/api/portraits/women/28.jpg" class="card-img-top" alt="Team member">
+            <img src="https://randomuser.me/api/portraits/women/28.jpg" class="card-img-top" alt="Член команды">
             <div class="card-body">
-                <h5 class="card-title">Emily Davis</h5>
-                <p class="card-subtitle text-muted mb-2">Housekeeping Manager</p>
-                <p class="card-text">Emily's eye for detail ensures that our rooms are immaculately maintained for the comfort of our guests.</p>
+                <h5 class="card-title">Нургуль Жумабаева</h5>
+                <p class="card-subtitle text-muted mb-2">Руководитель хозяйственной службы</p>
+                <p class="card-text">Внимание к деталям Нургуль обеспечивает безупречное содержание наших номеров для комфорта наших гостей.</p>
             </div>
         </div>
     </div>
@@ -114,9 +114,9 @@
 
 <div class="row">
     <div class="col-md-12 text-center">
-        <h2>Visit Us Today</h2>
-        <p class="lead mb-4">Experience the luxury and comfort that our hotel has to offer</p>
-        <a href="{{ route('rooms.index') }}" class="btn btn-primary btn-lg">Browse Our Rooms</a>
+        <h2>Посетите нас сегодня</h2>
+        <p class="lead mb-4">Испытайте роскошь и комфорт, которые предлагает наш отель</p>
+        <a href="{{ route('rooms.index') }}" class="btn btn-primary btn-lg">Посмотреть наши номера</a>
     </div>
 </div>
 @endsection

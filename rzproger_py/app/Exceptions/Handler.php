@@ -8,7 +8,7 @@ use Throwable;
 class Handler extends ExceptionHandler
 {
     /**
-     * A list of the exception types that are not reported.
+     * Список типов исключений, которые не регистрируются.
      *
      * @var array<int, class-string<Throwable>>
      */
@@ -17,7 +17,7 @@ class Handler extends ExceptionHandler
     ];
 
     /**
-     * A list of the inputs that are never flashed for validation exceptions.
+     * Список входных данных, которые никогда не будут мигать при исключениях проверки.
      *
      * @var array<int, string>
      */
@@ -28,7 +28,7 @@ class Handler extends ExceptionHandler
     ];
 
     /**
-     * Register the exception handling callbacks for the application.
+     * Регистрация обратных вызовов обработки исключений для приложения.
      *
      * @return void
      */

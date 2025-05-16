@@ -1,15 +1,15 @@
 @extends('layouts.app')
 
-@section('title', 'Search Results')
+@section('title', 'Результаты поиска')
 
 @section('content')
 <div class="row">
     <div class="col-md-12">
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="{{ route('home') }}">Home</a></li>
-                <li class="breadcrumb-item"><a href="{{ route('rooms.index') }}">Rooms</a></li>
-                <li class="breadcrumb-item active" aria-current="page">Search Results</li>
+                <li class="breadcrumb-item"><a href="{{ route('home') }}">Главная</a></li>
+                <li class="breadcrumb-item"><a href="{{ route('rooms.index') }}">Номера</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Результаты поиска</li>
             </ol>
         </nav>
     </div>
@@ -21,16 +21,16 @@
             <div class="card-body">
                 <div class="d-flex justify-content-between align-items-center flex-wrap">
                     <div>
-                        <h5 class="mb-0">Search Criteria</h5>
+                        <h5 class="mb-0">Критерии поиска</h5>
                         <p class="text-muted mb-0">
-                            <strong>Check-in:</strong> {{ $checkIn->format('M d, Y') }} | 
-                            <strong>Check-out:</strong> {{ $checkOut->format('M d, Y') }} | 
-                            <strong>Guests:</strong> {{ $guests }} | 
-                            <strong>Duration:</strong> {{ $checkIn->diffInDays($checkOut) }} night(s)
+                            <strong>Заезд:</strong> {{ $checkIn->format('d.m.Y') }} | 
+                            <strong>Выезд:</strong> {{ $checkOut->format('d.m.Y') }} | 
+                            <strong>Гости:</strong> {{ $guests }} | 
+                            <strong>Продолжительность:</strong> {{ $checkIn->diffInDays($checkOut) }} ночь(ей)
                         </p>
                     </div>
                     <button class="btn btn-outline-secondary mt-2 mt-md-0" type="button" data-bs-toggle="collapse" data-bs-target="#searchForm">
-                        Modify Search
+                        Изменить параметры
                     </button>
                 </div>
                 
@@ -39,15 +39,15 @@
                         @csrf
                         <div class="row g-3">
                             <div class="col-md-4">
-                                <label for="check_in" class="form-label">Check In</label>
+                                <label for="check_in" class="form-label">Заезд</label>
                                 <input type="date" class="form-control" id="check_in" name="check_in" min="{{ date('Y-m-d') }}" value="{{ $checkIn->format('Y-m-d') }}" required>
                             </div>
                             <div class="col-md-4">
-                                <label for="check_out" class="form-label">Check Out</label>
+                                <label for="check_out" class="form-label">Выезд</label>
                                 <input type="date" class="form-control" id="check_out" name="check_out" min="{{ date('Y-m-d', strtotime('+1 day')) }}" value="{{ $checkOut->format('Y-m-d') }}" required>
                             </div>
                             <div class="col-md-2">
-                                <label for="guests" class="form-label">Guests</label>
+                                <label for="guests" class="form-label">Гости</label>
                                 <select class="form-select" id="guests" name="guests" required>
                                     @for ($i = 1; $i <= 5; $i++)
                                         <option value="{{ $i }}" {{ $guests == $i ? 'selected' : '' }}>{{ $i }}</option>
@@ -55,7 +55,7 @@
                                 </select>
                             </div>
                             <div class="col-md-2 d-flex align-items-end">
-                                <button type="submit" class="btn btn-primary w-100">Search</button>
+                                <button type="submit" class="btn btn-primary w-100">Поиск</button>
                             </div>
                         </div>
                     </form>
@@ -67,9 +67,9 @@
 
 <div class="row">
     <div class="col-md-12">
-        <h2>Available Rooms</h2>
+        <h2>Доступные номера</h2>
         @if($availableRoomTypes->count() > 0)
-            <p>We found {{ $availableRoomTypes->count() }} room type(s) matching your criteria.</p>
+            <p>Найдено {{ $availableRoomTypes->count() }} типов номеров, соответствующих вашим критериям.</p>
             
             <div class="row">
                 @foreach($availableRoomTypes as $roomType)
@@ -78,15 +78,15 @@
                             @if($roomType->image)
                                 <img src="{{ $roomType->image }}" class="card-img-top" alt="{{ $roomType->name }}">
                             @else
-                                <img src="https://via.placeholder.com/300x200?text=Room+Image" class="card-img-top" alt="Room placeholder">
+                                <img src="https://via.placeholder.com/300x200?text=Room+Image" class="card-img-top" alt="Фото номера">
                             @endif
                             <div class="card-body">
                                 <h5 class="card-title">{{ $roomType->name }}</h5>
                                 <p class="card-text">{{ Str::limit($roomType->description, 100) }}</p>
                                 <ul class="list-group list-group-flush mb-3">
-                                    <li class="list-group-item"><i class="fas fa-user-friends me-2"></i> Max {{ $roomType->max_occupancy }} guests</li>
-                                    <li class="list-group-item"><i class="fas fa-dollar-sign me-2"></i> ${{ $roomType->price_per_night }} per night</li>
-                                    <li class="list-group-item"><i class="fas fa-calculator me-2"></i> Total: ${{ $roomType->price_per_night * $checkIn->diffInDays($checkOut) }}</li>
+                                    <li class="list-group-item"><i class="fas fa-user-friends me-2"></i> Макс. {{ $roomType->max_occupancy }} гостей</li>
+                                    <li class="list-group-item"><i class="fas fa-dollar-sign me-2"></i> {{ \App\Helpers\CurrencyHelper::convertAndFormat($roomType->price_per_night) }} за ночь</li>
+                                    <li class="list-group-item"><i class="fas fa-calculator me-2"></i> Всего: {{ \App\Helpers\CurrencyHelper::convertAndFormat($roomType->price_per_night * $checkIn->diffInDays($checkOut)) }}</li>
                                 </ul>
                                 
                                 <form action="{{ route('bookings.create') }}" method="POST">
@@ -97,7 +97,7 @@
                                     <input type="hidden" name="guests" value="{{ $guests }}">
                                     
                                     <div class="d-grid">
-                                        <button type="submit" class="btn btn-primary">Book Now</button>
+                                        <button type="submit" class="btn btn-primary">Забронировать</button>
                                     </div>
                                 </form>
                             </div>
@@ -107,7 +107,7 @@
             </div>
         @else
             <div class="alert alert-warning">
-                <i class="fas fa-exclamation-triangle me-2"></i> Sorry, we couldn't find any available rooms matching your criteria. Please try different dates or guest count.
+                <i class="fas fa-exclamation-triangle me-2"></i> Извините, мы не смогли найти доступных номеров, соответствующих вашим критериям. Пожалуйста, попробуйте выбрать другие даты или количество гостей.
             </div>
         @endif
     </div>
@@ -117,7 +117,7 @@
     <div class="col-md-12">
         <div class="card">
             <div class="card-header">
-                <h5 class="mb-0">Extra Services Available</h5>
+                <h5 class="mb-0">Доступные дополнительные услуги</h5>
             </div>
             <div class="card-body">
                 <div class="row">
@@ -127,13 +127,13 @@
                                 <div class="card-body text-center">
                                     <h5 class="card-title">{{ $service->name }}</h5>
                                     <p class="card-text">{{ $service->description }}</p>
-                                    <p class="fw-bold mb-0">${{ $service->price }}</p>
+                                    <p class="fw-bold mb-0">{{ \App\Helpers\CurrencyHelper::convertAndFormat($service->price) }}</p>
                                 </div>
                             </div>
                         </div>
                     @endforeach
                 </div>
-                <p class="text-muted mt-2">Note: Extra services can be added during the booking process.</p>
+                <p class="text-muted mt-2">Примечание: Дополнительные услуги можно добавить в процессе бронирования.</p>
             </div>
         </div>
     </div>

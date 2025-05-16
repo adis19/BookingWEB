@@ -39,8 +39,8 @@ class RoomController extends Controller
         ]);
 
         if ($request->hasFile('image')) {
-            $path = $request->file('image')->store('public/room-types');
-            $validated['image'] = Storage::url($path);
+            $path = $request->file('image')->store('room-types', 'public');
+            $validated['image'] = '/storage/' . $path;
         }
 
         // Convert amenities string to array
@@ -50,7 +50,7 @@ class RoomController extends Controller
 
         RoomType::create($validated);
 
-        return redirect()->route('admin.room-types.index')->with('success', 'Room type created successfully');
+        return redirect()->route('admin.room-types.index')->with('success', 'Тип номера успешно создан');
     }
 
     public function editRoomType(RoomType $roomType)
@@ -71,12 +71,12 @@ class RoomController extends Controller
 
         if ($request->hasFile('image')) {
             // Delete old image if exists
-            if ($roomType->image && Storage::exists('public/' . str_replace('/storage/', '', $roomType->image))) {
-                Storage::delete('public/' . str_replace('/storage/', '', $roomType->image));
+            if ($roomType->image && file_exists(public_path($roomType->image))) {
+                @unlink(public_path($roomType->image));
             }
-            
-            $path = $request->file('image')->store('public/room-types');
-            $validated['image'] = Storage::url($path);
+
+            $path = $request->file('image')->store('room-types', 'public');
+            $validated['image'] = '/storage/' . $path;
         }
 
         // Convert amenities string to array
@@ -86,24 +86,24 @@ class RoomController extends Controller
 
         $roomType->update($validated);
 
-        return redirect()->route('admin.room-types.index')->with('success', 'Room type updated successfully');
+        return redirect()->route('admin.room-types.index')->with('success', 'Тип номера успешно обновлен');
     }
 
     public function destroyRoomType(RoomType $roomType)
     {
         // Check if rooms of this type exist
         if ($roomType->rooms()->count() > 0) {
-            return redirect()->route('admin.room-types.index')->with('error', 'Cannot delete room type with associated rooms');
+            return redirect()->route('admin.room-types.index')->with('error', 'Невозможно удалить тип номера с связанными номерами');
         }
 
         // Delete the image if exists
-        if ($roomType->image && Storage::exists('public/' . str_replace('/storage/', '', $roomType->image))) {
-            Storage::delete('public/' . str_replace('/storage/', '', $roomType->image));
+        if ($roomType->image && file_exists(public_path($roomType->image))) {
+            @unlink(public_path($roomType->image));
         }
 
         $roomType->delete();
 
-        return redirect()->route('admin.room-types.index')->with('success', 'Room type deleted successfully');
+        return redirect()->route('admin.room-types.index')->with('success', 'Тип номера успешно удален');
     }
 
     // Individual Rooms Management
@@ -130,7 +130,7 @@ class RoomController extends Controller
 
         Room::create($validated);
 
-        return redirect()->route('admin.rooms.index')->with('success', 'Room created successfully');
+        return redirect()->route('admin.rooms.index')->with('success', 'Номер успешно создан');
     }
 
     public function editRoom(Room $room)
@@ -150,18 +150,18 @@ class RoomController extends Controller
 
         $room->update($validated);
 
-        return redirect()->route('admin.rooms.index')->with('success', 'Room updated successfully');
+        return redirect()->route('admin.rooms.index')->with('success', 'Номер успешно обновлен');
     }
 
     public function destroyRoom(Room $room)
     {
         // Check if room has bookings
         if ($room->bookings()->count() > 0) {
-            return redirect()->route('admin.rooms.index')->with('error', 'Cannot delete room with associated bookings');
+            return redirect()->route('admin.rooms.index')->with('error', 'Невозможно удалить номер с связанными бронированиями');
         }
 
         $room->delete();
 
-        return redirect()->route('admin.rooms.index')->with('success', 'Room deleted successfully');
+        return redirect()->route('admin.rooms.index')->with('success', 'Номер успешно удален');
     }
 }

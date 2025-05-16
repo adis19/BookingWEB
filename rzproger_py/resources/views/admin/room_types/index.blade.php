@@ -1,10 +1,10 @@
 @extends('layouts.admin')
 
-@section('title', 'Room Types')
+@section('title', 'Типы номеров')
 
 @section('actions')
 <a href="{{ route('admin.room-types.create') }}" class="btn btn-primary">
-    <i class="fas fa-plus-circle"></i> Add Room Type
+    <i class="fas fa-plus-circle"></i> Добавить тип номера
 </a>
 @endsection
 
@@ -16,12 +16,12 @@
                 <thead class="table-light">
                     <tr>
                         <th>ID</th>
-                        <th>Image</th>
-                        <th>Name</th>
-                        <th>Price/Night</th>
-                        <th>Max Occupancy</th>
-                        <th>Rooms</th>
-                        <th>Actions</th>
+                        <th>Изображение</th>
+                        <th>Название</th>
+                        <th>Цена/Ночь</th>
+                        <th>Макс. гостей</th>
+                        <th>Комнат</th>
+                        <th>Действия</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -38,7 +38,7 @@
                                 @endif
                             </td>
                             <td>{{ $roomType->name }}</td>
-                            <td>${{ $roomType->price_per_night }}</td>
+                            <td>{{ \App\Helpers\CurrencyHelper::formatKgs($roomType->price_per_night) }}</td>
                             <td>{{ $roomType->max_occupancy }}</td>
                             <td>{{ $roomType->rooms()->count() }}</td>
                             <td>
@@ -49,30 +49,30 @@
                                     <button type="button" class="btn btn-sm btn-outline-danger" data-bs-toggle="modal" data-bs-target="#deleteModal{{ $roomType->id }}">
                                         <i class="fas fa-trash"></i>
                                     </button>
-                                    
+
                                     <!-- Delete Modal -->
                                     <div class="modal fade" id="deleteModal{{ $roomType->id }}" tabindex="-1" aria-hidden="true">
                                         <div class="modal-dialog">
                                             <div class="modal-content">
                                                 <div class="modal-header">
-                                                    <h5 class="modal-title">Delete Room Type</h5>
+                                                    <h5 class="modal-title">Удалить тип номера</h5>
                                                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                 </div>
                                                 <div class="modal-body">
-                                                    <p>Are you sure you want to delete the room type <strong>{{ $roomType->name }}</strong>?</p>
+                                                    <p>Вы уверены, что хотите удалить тип номера <strong>{{ $roomType->name }}</strong>?</p>
                                                     @if($roomType->rooms()->count() > 0)
                                                         <div class="alert alert-warning">
-                                                            <i class="fas fa-exclamation-triangle me-2"></i> This room type has {{ $roomType->rooms()->count() }} rooms associated with it. You cannot delete it until all associated rooms are removed.
+                                                            <i class="fas fa-exclamation-triangle me-2"></i> Этот тип номера имеет {{ $roomType->rooms()->count() }} связанных комнат. Вы не можете удалить его, пока все связанные номера не будут удалены.
                                                         </div>
                                                     @endif
                                                 </div>
                                                 <div class="modal-footer">
-                                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Отмена</button>
                                                     @if($roomType->rooms()->count() == 0)
                                                         <form action="{{ route('admin.room-types.destroy', $roomType) }}" method="POST">
                                                             @csrf
                                                             @method('DELETE')
-                                                            <button type="submit" class="btn btn-danger">Delete</button>
+                                                            <button type="submit" class="btn btn-danger">Удалить</button>
                                                         </form>
                                                     @endif
                                                 </div>
@@ -84,7 +84,7 @@
                         </tr>
                     @empty
                         <tr>
-                            <td colspan="7" class="text-center">No room types found</td>
+                            <td colspan="7" class="text-center">Типов номеров не найдено</td>
                         </tr>
                     @endforelse
                 </tbody>

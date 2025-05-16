@@ -95,14 +95,14 @@
 <body>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <div class="container-fluid">
-            <a class="navbar-brand" href="{{ route('admin.dashboard') }}">LuxuryStay Admin</a>
+            <a class="navbar-brand" href="{{ route('admin.dashboard') }}">Люкс Отель Админ</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ route('home') }}" target="_blank">View Site</a>
+                        <a class="nav-link" href="{{ route('home') }}" target="_blank">Просмотр сайта</a>
                     </li>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -112,7 +112,7 @@
                             <li>
                                 <form method="POST" action="{{ route('logout') }}">
                                     @csrf
-                                    <button type="submit" class="dropdown-item">Logout</button>
+                                    <button type="submit" class="dropdown-item">Выход</button>
                                 </form>
                             </li>
                         </ul>
@@ -129,39 +129,39 @@
                     <ul class="nav flex-column">
                         <li class="nav-item">
                             <a class="nav-link {{ Route::is('admin.dashboard') ? 'active' : '' }}" href="{{ route('admin.dashboard') }}">
-                                <i class="fas fa-tachometer-alt"></i> Dashboard
+                                <i class="fas fa-tachometer-alt"></i> Дашборд
                             </a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link {{ Route::is('admin.room-types.*') ? 'active' : '' }}" href="{{ route('admin.room-types.index') }}">
-                                <i class="fas fa-bed"></i> Room Types
+                                <i class="fas fa-bed"></i> Типы номеров
                             </a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link {{ Route::is('admin.rooms.*') ? 'active' : '' }}" href="{{ route('admin.rooms.index') }}">
-                                <i class="fas fa-door-open"></i> Rooms
+                                <i class="fas fa-door-open"></i> Номера
                             </a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link {{ Route::is('admin.bookings.*') ? 'active' : '' }}" href="{{ route('admin.bookings.index') }}">
-                                <i class="fas fa-calendar-check"></i> Bookings
+                                <i class="fas fa-calendar-check"></i> Бронирования
                             </a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link {{ Route::is('admin.extra-services.*') ? 'active' : '' }}" href="{{ route('admin.extra-services.index') }}">
-                                <i class="fas fa-concierge-bell"></i> Extra Services
+                                <i class="fas fa-concierge-bell"></i> Доп. услуги
                             </a>
                         </li>
                     </ul>
                 </div>
             </div>
-            
+
             <div class="col-md-9 col-lg-10 main-content">
                 <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
                     <h1 class="h2">@yield('title', 'Dashboard')</h1>
                     @yield('actions')
                 </div>
-                
+
                 @if(session('success'))
                     <div class="alert alert-success">
                         {{ session('success') }}
@@ -173,7 +173,7 @@
                         {{ session('error') }}
                     </div>
                 @endif
-                
+
                 @yield('content')
             </div>
         </div>

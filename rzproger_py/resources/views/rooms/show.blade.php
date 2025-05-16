@@ -7,8 +7,8 @@
     <div class="col-md-12">
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="{{ route('home') }}">Home</a></li>
-                <li class="breadcrumb-item"><a href="{{ route('rooms.index') }}">Rooms</a></li>
+                <li class="breadcrumb-item"><a href="{{ route('home') }}">Главная</a></li>
+                <li class="breadcrumb-item"><a href="{{ route('rooms.index') }}">Номера</a></li>
                 <li class="breadcrumb-item active" aria-current="page">{{ $roomType->name }}</li>
             </ol>
         </nav>
@@ -20,14 +20,14 @@
         @if($roomType->image)
             <img src="{{ $roomType->image }}" class="img-fluid rounded" alt="{{ $roomType->name }}">
         @else
-            <img src="https://via.placeholder.com/800x500?text=Room+Image" class="img-fluid rounded" alt="Room placeholder">
+            <img src="https://via.placeholder.com/800x500?text=Room+Image" class="img-fluid rounded" alt="Фото номера">
         @endif
     </div>
     <div class="col-md-5">
         <h1>{{ $roomType->name }}</h1>
         <div class="d-flex align-items-center mb-3">
-            <span class="badge bg-primary me-2">{{ $roomType->max_occupancy }} Guests</span>
-            <span class="h5 mb-0">${{ $roomType->price_per_night }} <small class="text-muted">per night</small></span>
+            <span class="badge bg-primary me-2">{{ $roomType->max_occupancy }} гостей</span>
+            <span class="h5 mb-0">{{ \App\Helpers\CurrencyHelper::convertAndFormat($roomType->price_per_night) }} <small class="text-muted">за ночь</small></span>
         </div>
         
         <div class="mb-4">
@@ -35,7 +35,7 @@
         </div>
         
         @if(is_array($roomType->amenities) && count($roomType->amenities) > 0)
-            <h5>Amenities</h5>
+            <h5>Удобства</h5>
             <div class="row mb-4">
                 @foreach($roomType->amenities as $amenity)
                     <div class="col-md-6 mb-2">
@@ -46,13 +46,13 @@
         @endif
         
         <div class="booking-form p-4 bg-light rounded">
-            <h5 class="mb-3">Check Availability & Book Now</h5>
+            <h5 class="mb-3">Проверить доступность и забронировать</h5>
             <form action="{{ route('bookings.create') }}" method="POST">
                 @csrf
                 <input type="hidden" name="room_type_id" value="{{ $roomType->id }}">
                 
                 <div class="mb-3">
-                    <label for="check_in" class="form-label">Check In Date</label>
+                    <label for="check_in" class="form-label">Дата заезда</label>
                     <input type="date" class="form-control @error('check_in') is-invalid @enderror" id="check_in" name="check_in" min="{{ date('Y-m-d') }}" required>
                     @error('check_in')
                         <div class="invalid-feedback">{{ $message }}</div>
@@ -60,7 +60,7 @@
                 </div>
                 
                 <div class="mb-3">
-                    <label for="check_out" class="form-label">Check Out Date</label>
+                    <label for="check_out" class="form-label">Дата выезда</label>
                     <input type="date" class="form-control @error('check_out') is-invalid @enderror" id="check_out" name="check_out" min="{{ date('Y-m-d', strtotime('+1 day')) }}" required>
                     @error('check_out')
                         <div class="invalid-feedback">{{ $message }}</div>
@@ -68,7 +68,7 @@
                 </div>
                 
                 <div class="mb-3">
-                    <label for="guests" class="form-label">Number of Guests</label>
+                    <label for="guests" class="form-label">Количество гостей</label>
                     <select class="form-select @error('guests') is-invalid @enderror" id="guests" name="guests" required>
                         @for ($i = 1; $i <= $roomType->max_occupancy; $i++)
                             <option value="{{ $i }}">{{ $i }}</option>
@@ -79,7 +79,7 @@
                     @enderror
                 </div>
                 
-                <button type="submit" class="btn btn-primary btn-lg w-100">Check Availability</button>
+                <button type="submit" class="btn btn-primary btn-lg w-100">Проверить доступность</button>
             </form>
         </div>
     </div>
@@ -89,7 +89,7 @@
     <div class="col-md-12">
         <div class="card">
             <div class="card-header">
-                <h5 class="mb-0">Extra Services</h5>
+                <h5 class="mb-0">Дополнительные услуги</h5>
             </div>
             <div class="card-body">
                 <div class="row">
@@ -99,7 +99,7 @@
                                 <div class="card-body text-center">
                                     <h5 class="card-title">{{ $service->name }}</h5>
                                     <p class="card-text">{{ $service->description }}</p>
-                                    <p class="fw-bold mb-0">${{ $service->price }}</p>
+                                    <p class="fw-bold mb-0">{{ \App\Helpers\CurrencyHelper::convertAndFormat($service->price) }}</p>
                                 </div>
                             </div>
                         </div>

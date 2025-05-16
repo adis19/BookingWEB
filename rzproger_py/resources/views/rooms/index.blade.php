@@ -1,12 +1,12 @@
 @extends('layouts.app')
 
-@section('title', 'Our Rooms')
+@section('title', 'Наши номера')
 
 @section('hero')
 <div class="hero-section">
     <div class="container text-center">
-        <h1 class="display-4">Our Luxury Rooms</h1>
-        <p class="lead">Choose from a variety of elegantly designed rooms for your perfect stay</p>
+        <h1 class="display-4">Наши роскошные номера</h1>
+        <p class="lead">Выберите из различных изысканно оформленных номеров для идеального пребывания</p>
     </div>
 </div>
 @endsection
@@ -14,8 +14,8 @@
 @section('content')
 <div class="row mb-5">
     <div class="col-md-12 text-center">
-        <h2>Find Available Rooms</h2>
-        <p class="lead mb-4">Search for available rooms based on your dates and preferences</p>
+        <h2>Найти доступные номера</h2>
+        <p class="lead mb-4">Поиск доступных номеров на основе выбранных дат и предпочтений</p>
     </div>
     <div class="col-md-8 mx-auto">
         <div class="booking-form">
@@ -23,21 +23,21 @@
                 @csrf
                 <div class="row g-3">
                     <div class="col-md-4">
-                        <label for="check_in" class="form-label">Check In</label>
+                        <label for="check_in" class="form-label">Дата заезда</label>
                         <input type="date" class="form-control @error('check_in') is-invalid @enderror" id="check_in" name="check_in" min="{{ date('Y-m-d') }}" required>
                         @error('check_in')
                             <div class="invalid-feedback">{{ $message }}</div>
                         @enderror
                     </div>
                     <div class="col-md-4">
-                        <label for="check_out" class="form-label">Check Out</label>
+                        <label for="check_out" class="form-label">Дата выезда</label>
                         <input type="date" class="form-control @error('check_out') is-invalid @enderror" id="check_out" name="check_out" min="{{ date('Y-m-d', strtotime('+1 day')) }}" required>
                         @error('check_out')
                             <div class="invalid-feedback">{{ $message }}</div>
                         @enderror
                     </div>
                     <div class="col-md-2">
-                        <label for="guests" class="form-label">Guests</label>
+                        <label for="guests" class="form-label">Гости</label>
                         <select class="form-select @error('guests') is-invalid @enderror" id="guests" name="guests" required>
                             @for ($i = 1; $i <= 5; $i++)
                                 <option value="{{ $i }}">{{ $i }}</option>
@@ -48,7 +48,7 @@
                         @enderror
                     </div>
                     <div class="col-md-2 d-flex align-items-end">
-                        <button type="submit" class="btn btn-primary w-100">Search</button>
+                        <button type="submit" class="btn btn-primary w-100">Поиск</button>
                     </div>
                 </div>
             </form>
@@ -58,8 +58,8 @@
 
 <div class="row">
     <div class="col-md-12 text-center mb-4">
-        <h2>All Room Types</h2>
-        <p class="lead">Explore our selection of premium accommodations</p>
+        <h2>Все типы номеров</h2>
+        <p class="lead">Ознакомьтесь с нашим выбором комфортабельных номеров</p>
     </div>
     
     @foreach($roomTypes as $roomType)
@@ -68,26 +68,26 @@
             @if($roomType->image)
                 <img src="{{ $roomType->image }}" class="card-img-top" alt="{{ $roomType->name }}">
             @else
-                <img src="https://via.placeholder.com/300x200?text=Room+Image" class="card-img-top" alt="Room placeholder">
+                <img src="https://via.placeholder.com/300x200?text=Room+Image" class="card-img-top" alt="Фото номера">
             @endif
             <div class="card-body">
                 <h5 class="card-title">{{ $roomType->name }}</h5>
                 <p class="card-text">{{ Str::limit($roomType->description, 100) }}</p>
                 <ul class="list-group list-group-flush mb-3">
-                    <li class="list-group-item"><i class="fas fa-user-friends me-2"></i> Max {{ $roomType->max_occupancy }} guests</li>
-                    <li class="list-group-item"><i class="fas fa-dollar-sign me-2"></i> ${{ $roomType->price_per_night }} per night</li>
+                    <li class="list-group-item"><i class="fas fa-user-friends me-2"></i> Макс. {{ $roomType->max_occupancy }} гостей</li>
+                    <li class="list-group-item"><i class="fas fa-dollar-sign me-2"></i> {{ \App\Helpers\CurrencyHelper::convertAndFormat($roomType->price_per_night) }} за ночь</li>
                     @if(is_array($roomType->amenities) && count($roomType->amenities) > 0)
                         <li class="list-group-item">
                             <i class="fas fa-concierge-bell me-2"></i> 
                             {{ implode(', ', array_slice($roomType->amenities, 0, 3)) }}
                             @if(count($roomType->amenities) > 3)
-                                and more...
+                                и другое...
                             @endif
                         </li>
                     @endif
                 </ul>
                 <div class="text-center">
-                    <a href="{{ route('rooms.show', $roomType) }}" class="btn btn-outline-primary">View Details</a>
+                    <a href="{{ route('rooms.show', $roomType) }}" class="btn btn-outline-primary">Подробнее</a>
                 </div>
             </div>
         </div>

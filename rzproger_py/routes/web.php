@@ -13,12 +13,12 @@ use App\Http\Controllers\Admin\ExtraServiceController;
 
 /*
 |--------------------------------------------------------------------------
-| Web Routes
+| Веб-маршруты
 |--------------------------------------------------------------------------
 |
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
+| Здесь вы можете зарегистрировать веб-маршруты для вашего приложения. Эти
+| маршруты загружаются RouteServiceProvider в группе, содержащей
+| middleware группу "web". Теперь создайте что-то великолепное!
 |
 */
 
@@ -43,7 +43,7 @@ Route::post('/register', [RegisterController::class, 'register']);
 Route::middleware(['auth'])->group(function () {
     Route::get('/bookings', [BookingController::class, 'index'])->name('bookings.index');
     Route::post('/bookings/create', [BookingController::class, 'create'])->name('bookings.create');
-    Route::post('/bookings', [BookingController::class, 'store'])->name('bookings.store');
+    Route::post('/bookings/store', [BookingController::class, 'store'])->name('bookings.store');
     Route::get('/bookings/{booking}', [BookingController::class, 'show'])->name('bookings.show');
     Route::post('/bookings/{booking}/cancel', [BookingController::class, 'cancel'])->name('bookings.cancel');
 });
@@ -52,7 +52,7 @@ Route::middleware(['auth'])->group(function () {
 Route::prefix('admin')->middleware(['auth', 'admin'])->name('admin.')->group(function () {
     // Dashboard
     Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
-    
+
     // Room Types Management
     Route::get('/room-types', [AdminRoomController::class, 'indexRoomTypes'])->name('room-types.index');
     Route::get('/room-types/create', [AdminRoomController::class, 'createRoomType'])->name('room-types.create');
@@ -60,7 +60,7 @@ Route::prefix('admin')->middleware(['auth', 'admin'])->name('admin.')->group(fun
     Route::get('/room-types/{roomType}/edit', [AdminRoomController::class, 'editRoomType'])->name('room-types.edit');
     Route::put('/room-types/{roomType}', [AdminRoomController::class, 'updateRoomType'])->name('room-types.update');
     Route::delete('/room-types/{roomType}', [AdminRoomController::class, 'destroyRoomType'])->name('room-types.destroy');
-    
+
     // Rooms Management
     Route::get('/rooms', [AdminRoomController::class, 'indexRooms'])->name('rooms.index');
     Route::get('/rooms/create', [AdminRoomController::class, 'createRoom'])->name('rooms.create');
@@ -68,7 +68,7 @@ Route::prefix('admin')->middleware(['auth', 'admin'])->name('admin.')->group(fun
     Route::get('/rooms/{room}/edit', [AdminRoomController::class, 'editRoom'])->name('rooms.edit');
     Route::put('/rooms/{room}', [AdminRoomController::class, 'updateRoom'])->name('rooms.update');
     Route::delete('/rooms/{room}', [AdminRoomController::class, 'destroyRoom'])->name('rooms.destroy');
-    
+
     // Bookings Management
     Route::get('/bookings', [AdminBookingController::class, 'index'])->name('bookings.index');
     Route::get('/bookings/{booking}', [AdminBookingController::class, 'show'])->name('bookings.show');
@@ -76,7 +76,7 @@ Route::prefix('admin')->middleware(['auth', 'admin'])->name('admin.')->group(fun
     Route::put('/bookings/{booking}', [AdminBookingController::class, 'update'])->name('bookings.update');
     Route::delete('/bookings/{booking}', [AdminBookingController::class, 'destroy'])->name('bookings.destroy');
     Route::patch('/bookings/{booking}/status', [AdminBookingController::class, 'updateStatus'])->name('bookings.update-status');
-    
+
     // Extra Services Management
     Route::get('/extra-services', [ExtraServiceController::class, 'index'])->name('extra-services.index');
     Route::get('/extra-services/create', [ExtraServiceController::class, 'create'])->name('extra-services.create');
@@ -85,3 +85,19 @@ Route::prefix('admin')->middleware(['auth', 'admin'])->name('admin.')->group(fun
     Route::put('/extra-services/{extraService}', [ExtraServiceController::class, 'update'])->name('extra-services.update');
     Route::delete('/extra-services/{extraService}', [ExtraServiceController::class, 'destroy'])->name('extra-services.destroy');
 });
+
+// Debug routes
+Route::get('/debug/clear-cache', function() {
+    Artisan::call('cache:clear');
+    Artisan::call('route:clear');
+    Artisan::call('config:clear');
+    Artisan::call('view:clear');
+    return "Application cache cleared";
+});
+
+// Debug route to check room availability
+Route::get('/debug/check-availability', [App\Http\Controllers\DebugController::class, 'checkAvailability']);
+
+// Debug route for form submission
+Route::any('/debug/request', [App\Http\Controllers\DebugController::class, 'debugRequest']);
+

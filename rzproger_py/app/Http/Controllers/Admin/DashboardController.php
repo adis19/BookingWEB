@@ -22,15 +22,24 @@ class DashboardController extends Controller
         $confirmedBookings = Booking::where('status', 'confirmed')->count();
         $pendingBookings = Booking::where('status', 'pending')->count();
         $totalRooms = Room::count();
-        $availableRooms = Room::where('is_available', true)->count();
+
+        // Получение списка комнат с подтвержденными бронированиями
+        $roomsWithConfirmedBookings = Booking::where('status', 'confirmed')
+            ->distinct('room_id')
+            ->pluck('room_id')
+            ->toArray();
+
+        // Доступные номера - это все номера, которые не имеют подтвержденных бронирований
+        $availableRooms = $totalRooms - count($roomsWithConfirmedBookings);
+
         $totalUsers = User::where('role', 'user')->count();
-        
+
         // Get recent bookings
         $recentBookings = Booking::with(['user', 'room.roomType'])
             ->orderBy('created_at', 'desc')
             ->take(5)
             ->get();
-            
+
         // Get upcoming check-ins
         $upcomingCheckIns = Booking::with(['user', 'room.roomType'])
             ->where('check_in_date', '>=', Carbon::today())
@@ -38,12 +47,12 @@ class DashboardController extends Controller
             ->orderBy('check_in_date')
             ->take(5)
             ->get();
-            
-        // Calculate monthly revenue
-        $monthlyRevenue = Booking::where('status', 'confirmed')
+
+        // Calculate monthly revenue (только от завершенных бронирований)
+        $monthlyRevenue = Booking::where('status', 'completed')
             ->whereMonth('created_at', Carbon::now()->month)
             ->sum('total_price');
-        
+
         return view('admin.dashboard', compact(
             'totalBookings',
             'confirmedBookings',

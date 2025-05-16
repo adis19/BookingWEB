@@ -4,12 +4,13 @@ use Illuminate\Support\Facades\Broadcast;
 
 /*
 |--------------------------------------------------------------------------
-| Broadcast Channels
+| Каналы трансляции
 |--------------------------------------------------------------------------
 |
-| Here you may register all of the event broadcasting channels that your
-| application supports. The given channel authorization callbacks are
-| used to check if an authenticated user can listen to the channel.
+| Здесь вы можете зарегистрировать все каналы трансляции событий, которые
+| поддерживает ваше приложение. Указанные функции обратного вызова проверки
+| авторизации канала используются для проверки того, может ли
+| аутентифицированный пользователь прослушивать канал.
 |
 */
 

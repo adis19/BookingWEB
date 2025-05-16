@@ -84,40 +84,40 @@
     <header>
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
             <div class="container">
-                <a class="navbar-brand" href="{{ route('home') }}">LuxuryStay</a>
+                <a class="navbar-brand" href="{{ route('home') }}">Люкс Отель</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="collapse navbar-collapse" id="navbarNav">
                     <ul class="navbar-nav me-auto">
                         <li class="nav-item">
-                            <a class="nav-link {{ Route::is('home') ? 'active' : '' }}" href="{{ route('home') }}">Home</a>
+                            <a class="nav-link {{ Route::is('home') ? 'active' : '' }}" href="{{ route('home') }}">Главная</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link {{ Route::is('rooms.index') ? 'active' : '' }}" href="{{ route('rooms.index') }}">Rooms</a>
+                            <a class="nav-link {{ Route::is('rooms.index') ? 'active' : '' }}" href="{{ route('rooms.index') }}">Номера</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link {{ Route::is('about') ? 'active' : '' }}" href="{{ route('about') }}">About</a>
+                            <a class="nav-link {{ Route::is('about') ? 'active' : '' }}" href="{{ route('about') }}">О нас</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link {{ Route::is('contact') ? 'active' : '' }}" href="{{ route('contact') }}">Contact</a>
+                            <a class="nav-link {{ Route::is('contact') ? 'active' : '' }}" href="{{ route('contact') }}">Контакты</a>
                         </li>
                     </ul>
                     <ul class="navbar-nav">
                         @guest
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ route('login') }}">Login</a>
+                                <a class="nav-link" href="{{ route('login') }}">Вход</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ route('register') }}">Register</a>
+                                <a class="nav-link" href="{{ route('register') }}">Регистрация</a>
                             </li>
                         @else
                             <li class="nav-item">
-                                <a class="nav-link {{ Route::is('bookings.index') ? 'active' : '' }}" href="{{ route('bookings.index') }}">My Bookings</a>
+                                <a class="nav-link {{ Route::is('bookings.index') ? 'active' : '' }}" href="{{ route('bookings.index') }}">Мои бронирования</a>
                             </li>
                             @if(Auth::user()->isAdmin())
                                 <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('admin.dashboard') }}">Admin Dashboard</a>
+                                    <a class="nav-link" href="{{ route('admin.dashboard') }}">Панель администратора</a>
                                 </li>
                             @endif
                             <li class="nav-item dropdown">
@@ -128,7 +128,7 @@
                                     <li>
                                         <form method="POST" action="{{ route('logout') }}">
                                             @csrf
-                                            <button type="submit" class="dropdown-item">Logout</button>
+                                            <button type="submit" class="dropdown-item">Выход</button>
                                         </form>
                                     </li>
                                 </ul>
@@ -142,7 +142,7 @@
 
     <main class="main-content">
         @yield('hero')
-        
+
         <div class="container py-4">
             @if(session('success'))
                 <div class="alert alert-success">
@@ -155,7 +155,7 @@
                     {{ session('error') }}
                 </div>
             @endif
-            
+
             @yield('content')
         </div>
     </main>
@@ -164,30 +164,30 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-4">
-                    <h4>LuxuryStay</h4>
-                    <p>Experience the ultimate luxury in our premium hotel rooms. Perfect for both business travelers and vacationers.</p>
+                    <h4>Люкс Отель</h4>
+                    <p>Почувствуйте непревзойденную роскошь в наших номерах премиум-класса. Идеально подходит как для деловых путешественников, так и для отдыхающих.</p>
                 </div>
                 <div class="col-md-4">
-                    <h4>Quick Links</h4>
+                    <h4>Быстрые ссылки</h4>
                     <ul class="list-unstyled">
-                        <li><a href="{{ route('home') }}" class="text-white">Home</a></li>
-                        <li><a href="{{ route('rooms.index') }}" class="text-white">Rooms</a></li>
-                        <li><a href="{{ route('about') }}" class="text-white">About Us</a></li>
-                        <li><a href="{{ route('contact') }}" class="text-white">Contact</a></li>
+                        <li><a href="{{ route('home') }}" class="text-white">Главная</a></li>
+                        <li><a href="{{ route('rooms.index') }}" class="text-white">Номера</a></li>
+                        <li><a href="{{ route('about') }}" class="text-white">О нас</a></li>
+                        <li><a href="{{ route('contact') }}" class="text-white">Контакты</a></li>
                     </ul>
                 </div>
                 <div class="col-md-4">
-                    <h4>Contact Us</h4>
+                    <h4>Связаться с нами</h4>
                     <address>
-                        <p><i class="fas fa-map-marker-alt me-2"></i> 123 Luxury Avenue, City, Country</p>
-                        <p><i class="fas fa-phone me-2"></i> +1 234 567 8901</p>
-                        <p><i class="fas fa-envelope me-2"></i> info@luxurystay.com</p>
+                        <p><i class="fas fa-map-marker-alt me-2"></i> ул. Люкс, 123, г. Бишкек, Кыргызстан</p>
+                        <p><i class="fas fa-phone me-2"></i> +996 312 123 456</p>
+                        <p><i class="fas fa-envelope me-2"></i> info@luxotel.kg</p>
                     </address>
                 </div>
             </div>
             <hr class="bg-light">
             <div class="text-center">
-                <p>&copy; {{ date('Y') }} LuxuryStay. All rights reserved.</p>
+                <p>&copy; {{ date('Y') }} Люкс Отель. Все права защищены.</p>
             </div>
         </div>
     </footer>
