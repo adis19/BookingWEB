@@ -63,7 +63,7 @@
 
                 @if($roomType->image)
                     <div class="mb-2">
-                        <img src="{{ $roomType->image }}" alt="{{ $roomType->name }}" class="img-thumbnail" style="max-height: 200px;">
+                        <img src="{{ \App\Helpers\ImageHelper::getImageUrl($roomType->image) }}" alt="{{ $roomType->name }}" class="img-thumbnail" style="max-height: 200px;">
                     </div>
                 @endif
 

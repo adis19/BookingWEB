@@ -17,11 +17,7 @@
 
 <div class="row mb-5">
     <div class="col-md-7">
-        @if($roomType->image)
-            <img src="{{ $roomType->image }}" class="img-fluid rounded" alt="{{ $roomType->name }}">
-        @else
-            <img src="https://via.placeholder.com/800x500?text=Room+Image" class="img-fluid rounded" alt="Фото номера">
-        @endif
+        <img src="{{ \App\Helpers\ImageHelper::getImageUrl($roomType->image) }}" class="img-fluid rounded" alt="{{ $roomType->name }}">
     </div>
     <div class="col-md-5">
         <h1>{{ $roomType->name }}</h1>

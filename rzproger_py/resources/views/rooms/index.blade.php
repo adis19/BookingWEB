@@ -65,11 +65,7 @@
     @foreach($roomTypes as $roomType)
     <div class="col-md-4 mb-4">
         <div class="card h-100 room-card">
-            @if($roomType->image)
-                <img src="{{ $roomType->image }}" class="card-img-top" alt="{{ $roomType->name }}">
-            @else
-                <img src="https://via.placeholder.com/300x200?text=Room+Image" class="card-img-top" alt="Фото номера">
-            @endif
+            <img src="{{ \App\Helpers\ImageHelper::getImageUrl($roomType->image) }}" class="card-img-top" alt="{{ $roomType->name }}">
             <div class="card-body">
                 <h5 class="card-title">{{ $roomType->name }}</h5>
                 <p class="card-text">{{ Str::limit($roomType->description, 100) }}</p>

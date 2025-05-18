@@ -41,6 +41,13 @@ class RoomController extends Controller
         if ($request->hasFile('image')) {
             $path = $request->file('image')->store('room-types', 'public');
             $validated['image'] = '/storage/' . $path;
+            
+            // Копируем файл в public/storage для обеспечения доступа
+            $sourceFile = storage_path('app/public/' . $path);
+            $destFile = public_path('storage/' . basename($path));
+            if (file_exists($sourceFile)) {
+                copy($sourceFile, $destFile);
+            }
         }
 
         // Convert amenities string to array
@@ -77,6 +84,13 @@ class RoomController extends Controller
 
             $path = $request->file('image')->store('room-types', 'public');
             $validated['image'] = '/storage/' . $path;
+            
+            // Копируем файл в public/storage для обеспечения доступа
+            $sourceFile = storage_path('app/public/' . $path);
+            $destFile = public_path('storage/' . basename($path));
+            if (file_exists($sourceFile)) {
+                copy($sourceFile, $destFile);
+            }
         }
 
         // Convert amenities string to array
