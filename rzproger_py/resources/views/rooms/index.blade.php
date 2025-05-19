@@ -48,7 +48,9 @@
                         @enderror
                     </div>
                     <div class="col-md-2 d-flex align-items-end">
-                        <button type="submit" class="btn btn-primary w-100">Поиск</button>
+                        <button type="submit" class="btn btn-primary search-btn w-100">
+                            <i class="fas fa-search"></i>
+                        </button>
                     </div>
                 </div>
             </form>
@@ -61,7 +63,7 @@
         <h2>Все типы номеров</h2>
         <p class="lead">Ознакомьтесь с нашим выбором комфортабельных номеров</p>
     </div>
-    
+
     @foreach($roomTypes as $roomType)
     <div class="col-md-4 mb-4">
         <div class="card h-100 room-card">
@@ -74,7 +76,7 @@
                     <li class="list-group-item"><i class="fas fa-dollar-sign me-2"></i> {{ \App\Helpers\CurrencyHelper::convertAndFormat($roomType->price_per_night) }} за ночь</li>
                     @if(is_array($roomType->amenities) && count($roomType->amenities) > 0)
                         <li class="list-group-item">
-                            <i class="fas fa-concierge-bell me-2"></i> 
+                            <i class="fas fa-concierge-bell me-2"></i>
                             {{ implode(', ', array_slice($roomType->amenities, 0, 3)) }}
                             @if(count($roomType->amenities) > 3)
                                 и другое...
@@ -99,12 +101,12 @@
         document.getElementById('check_in').addEventListener('change', function() {
             const checkInDate = new Date(this.value);
             checkInDate.setDate(checkInDate.getDate() + 1);
-            
+
             const checkOutField = document.getElementById('check_out');
             const checkOutMin = checkInDate.toISOString().split('T')[0];
-            
+
             checkOutField.min = checkOutMin;
-            
+
             // If current check-out date is earlier than new min, update it
             if (checkOutField.value && new Date(checkOutField.value) < checkInDate) {
                 checkOutField.value = checkOutMin;
