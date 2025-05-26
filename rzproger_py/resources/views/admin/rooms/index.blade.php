@@ -71,14 +71,16 @@
                                                         </div>
                                                     @endif
                                                 </div>
+                                                @if($room->bookings()->count() == 0)
+                                                    <form id="deleteForm{{ $room->id }}" action="{{ route('admin.rooms.destroy', $room) }}" method="POST">
+                                                        @csrf
+                                                        @method('DELETE')
+                                                    </form>
+                                                @endif
                                                 <div class="modal-footer">
                                                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Отмена</button>
                                                     @if($room->bookings()->count() == 0)
-                                                        <form action="{{ route('admin.rooms.destroy', $room) }}" method="POST">
-                                                            @csrf
-                                                            @method('DELETE')
-                                                            <button type="submit" class="btn btn-danger">Удалить</button>
-                                                        </form>
+                                                        <button type="submit" form="deleteForm{{ $room->id }}" class="btn btn-danger">Удалить</button>
                                                     @endif
                                                 </div>
                                             </div>

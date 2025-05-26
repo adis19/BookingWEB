@@ -288,12 +288,38 @@
             border-left-color: var(--info);
         }
 
-        .stat-card-warning {
-            border-left-color: var(--warning);
+        /* Enhanced Stat Cards */
+        .stat-card {
+            border-left: 0.25rem solid;
+            border-radius: 0.35rem;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .stat-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, transparent 0%, rgba(255,255,255,0.1) 100%);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .stat-card:hover::before {
+            opacity: 1;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 0.5rem 2rem 0 rgba(58, 59, 69, 0.2);
         }
 
         .stat-card .card-body {
-            padding: 1.25rem;
+            padding: 1.5rem;
         }
 
         .stat-card .card-title {
@@ -301,38 +327,306 @@
             font-weight: 700;
             text-transform: uppercase;
             letter-spacing: 0.05rem;
-            margin-bottom: 0.25rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .stat-card .card-value {
+            font-size: 1.75rem;
+            font-weight: 700;
+            color: var(--dark);
+            margin-bottom: 0;
+        }
+
+        .stat-card .card-value.small-text {
+            font-size: 1.25rem;
+        }
+
+        .stat-card .stat-icon {
+            font-size: 2.5rem;
+            opacity: 0.2;
+        }
+
+        .stat-card-primary {
+            border-left-color: var(--primary);
         }
 
         .stat-card-primary .card-title {
             color: var(--primary);
         }
 
+        .stat-card-primary .stat-icon {
+            color: var(--primary);
+        }
+
+        .stat-card-success {
+            border-left-color: var(--success);
+        }
+
         .stat-card-success .card-title {
             color: var(--success);
+        }
+
+        .stat-card-success .stat-icon {
+            color: var(--success);
+        }
+
+        .stat-card-info {
+            border-left-color: var(--info);
         }
 
         .stat-card-info .card-title {
             color: var(--info);
         }
 
+        .stat-card-info .stat-icon {
+            color: var(--info);
+        }
+
+        .stat-card-warning {
+            border-left-color: var(--warning);
+        }
+
         .stat-card-warning .card-title {
             color: var(--warning);
         }
 
-        .stat-card .card-value {
-            font-size: 1.5rem;
-            font-weight: 600;
-            color: var(--dark);
-            margin-bottom: 0;
+        .stat-card-warning .stat-icon {
+            color: var(--warning);
         }
 
-        .stat-card .card-icon {
-            font-size: 2rem;
-            opacity: 0.1;
-            position: absolute;
-            top: 1rem;
-            right: 1rem;
+        /* Booking Items */
+        .booking-item {
+            padding: 1rem 1.25rem;
+            border-bottom: 1px solid #e3e6f0;
+            transition: all 0.3s ease;
+        }
+
+        .booking-item:last-child {
+            border-bottom: none;
+        }
+
+        .booking-item:hover {
+            background-color: rgba(78, 115, 223, 0.05);
+        }
+
+        .booking-item.upcoming:hover {
+            background-color: rgba(28, 200, 138, 0.05);
+        }
+
+        .booking-info .booking-id {
+            font-weight: 700;
+            color: var(--primary);
+            font-size: 0.9rem;
+        }
+
+        .booking-info .booking-user {
+            font-weight: 600;
+            margin-top: 0.25rem;
+            font-size: 0.95rem;
+        }
+
+        .booking-info .booking-room {
+            font-size: 0.85rem;
+            margin-top: 0.25rem;
+        }
+
+        .booking-date {
+            font-weight: 600;
+            font-size: 0.9rem;
+            color: var(--dark);
+        }
+
+        .booking-date.highlight {
+            color: var(--success);
+            font-weight: 700;
+        }
+
+        .booking-status {
+            margin-top: 0.25rem;
+        }
+
+        .booking-guests {
+            font-size: 0.85rem;
+            color: var(--secondary);
+            margin-top: 0.25rem;
+        }
+
+        .booking-actions {
+            margin-top: 0.75rem;
+        }
+
+        /* Empty States */
+        .empty-state {
+            text-align: center;
+            padding: 2rem;
+            color: var(--secondary);
+        }
+
+        .empty-state i {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            opacity: 0.5;
+        }
+
+        .empty-state p {
+            margin-bottom: 0;
+            font-size: 0.9rem;
+        }
+
+        /* Quick Action Buttons */
+        .quick-action-btn {
+            display: flex;
+            align-items: center;
+            padding: 1.25rem;
+            background: white;
+            border: 2px solid #e3e6f0;
+            border-radius: 0.5rem;
+            text-decoration: none;
+            color: var(--dark);
+            transition: all 0.3s ease;
+            height: 100%;
+            min-height: 100px;
+        }
+
+        .quick-action-btn:hover {
+            border-color: var(--primary);
+            color: var(--primary);
+            transform: translateY(-3px);
+            box-shadow: 0 0.5rem 1.5rem rgba(78, 115, 223, 0.15);
+        }
+
+        .quick-action-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 1rem;
+            font-size: 1.5rem;
+            color: white;
+            flex-shrink: 0;
+        }
+
+        .quick-action-icon.bg-primary {
+            background-color: var(--primary);
+        }
+
+        .quick-action-icon.bg-success {
+            background-color: var(--success);
+        }
+
+        .quick-action-icon.bg-info {
+            background-color: var(--info);
+        }
+
+        .quick-action-icon.bg-warning {
+            background-color: var(--warning);
+        }
+
+        .quick-action-text {
+            flex-grow: 1;
+        }
+
+        .quick-action-text span {
+            font-weight: 600;
+            font-size: 0.95rem;
+        }
+
+        /* Mobile Booking Cards */
+        .booking-card {
+            border-bottom: 1px solid #e3e6f0;
+            padding: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .booking-card:last-child {
+            border-bottom: none;
+        }
+
+        .booking-card:hover {
+            background-color: rgba(78, 115, 223, 0.05);
+        }
+
+        .booking-card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 0.75rem;
+        }
+
+        .booking-id {
+            font-weight: 700;
+            color: var(--primary);
+            font-size: 1.1rem;
+        }
+
+        .booking-card-body {
+            margin-bottom: 1rem;
+        }
+
+        .booking-info-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 0.5rem;
+            font-size: 0.9rem;
+        }
+
+        .booking-info-item i {
+            width: 20px;
+            margin-right: 0.5rem;
+            flex-shrink: 0;
+        }
+
+        .booking-info-item span {
+            flex-grow: 1;
+        }
+
+        .booking-card-actions {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+        }
+
+        .booking-card-actions .btn {
+            flex: 1;
+            min-width: 90px;
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            .stat-card .card-value {
+                font-size: 1.5rem;
+            }
+
+            .stat-card .stat-icon {
+                font-size: 2rem;
+            }
+
+            .booking-item {
+                padding: 0.75rem;
+            }
+
+            .quick-action-btn {
+                padding: 1rem;
+                min-height: 80px;
+            }
+
+            .quick-action-icon {
+                width: 40px;
+                height: 40px;
+                font-size: 1.2rem;
+                margin-right: 0.75rem;
+            }
+
+            .quick-action-text span {
+                font-size: 0.85rem;
+            }
+
+            .booking-card-actions .btn {
+                font-size: 0.75rem;
+                padding: 0.375rem 0.5rem;
+            }
         }
 
         /* Tables */
@@ -492,6 +786,118 @@
             color: var(--danger);
         }
 
+        /* Modal Stability Fixes */
+        .modal {
+            z-index: 1055 !important;
+        }
+
+        .modal-backdrop {
+            z-index: 1050 !important;
+        }
+
+        .modal.show .modal-dialog {
+            transform: none !important;
+        }
+
+        .modal-dialog {
+            pointer-events: none;
+        }
+
+        .modal-content {
+            pointer-events: auto;
+        }
+
+        /* Prevent modal flashing/jumping */
+        .modal.fade .modal-dialog {
+            transition: transform 0.3s ease-out !important;
+            transform: translate(0, -50px) !important;
+        }
+
+        .modal.show .modal-dialog {
+            transform: none !important;
+        }
+
+        /* Prevent form resubmission issues */
+        .modal form {
+            margin: 0;
+            padding: 0;
+        }
+
+        .modal-footer form {
+            display: inline-block;
+            margin: 0;
+        }
+
+        /* Disable animation for problematic modals */
+        .modal.no-animation {
+            animation: none !important;
+        }
+
+        .modal.no-animation .modal-dialog {
+            transition: none !important;
+            transform: none !important;
+        }
+
+        /* Mobile Booking Cards */
+        .booking-card {
+            border-bottom: 1px solid #e3e6f0;
+            padding: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .booking-card:last-child {
+            border-bottom: none;
+        }
+
+        .booking-card:hover {
+            background-color: rgba(78, 115, 223, 0.05);
+        }
+
+        .booking-card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 0.75rem;
+        }
+
+        .booking-id {
+            font-weight: 700;
+            color: var(--primary);
+            font-size: 1.1rem;
+        }
+
+        .booking-card-body {
+            margin-bottom: 1rem;
+        }
+
+        .booking-info-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 0.5rem;
+            font-size: 0.9rem;
+        }
+
+        .booking-info-item i {
+            width: 20px;
+            margin-right: 0.5rem;
+            font-size: 0.85rem;
+        }
+
+        .booking-info-item span {
+            color: var(--dark);
+        }
+
+        .booking-card-actions {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+        }
+
+        .booking-card-actions .btn {
+            flex: 1;
+            min-width: auto;
+        }
+
         /* Responsive */
         @media (max-width: 991.98px) {
             .sidebar {
@@ -510,6 +916,32 @@
             body.sidebar-toggled .content-wrapper,
             body.sidebar-toggled .topbar {
                 margin-left: var(--sidebar-width);
+            }
+        }
+
+        /* Mobile specific styles */
+        @media (max-width: 768px) {
+            .booking-card-actions {
+                flex-direction: column;
+            }
+
+            .booking-card-actions .btn {
+                flex: none;
+                width: 100%;
+                margin-bottom: 0.25rem;
+            }
+
+            .table-responsive {
+                font-size: 0.85rem;
+            }
+
+            .table th, .table td {
+                padding: 0.5rem 0.25rem;
+                vertical-align: middle;
+            }
+
+            .btn-group .btn {
+                padding: 0.25rem 0.5rem;
             }
         }
     </style>
@@ -689,6 +1121,85 @@
                 bsAlert.close();
             });
         }, 5000);
+
+        // Modal stability fixes
+        document.addEventListener('DOMContentLoaded', function() {
+            // Handle delete booking buttons with custom class
+            const deleteBookingButtons = document.querySelectorAll('.delete-booking-btn');
+
+            deleteBookingButtons.forEach(button => {
+                button.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    e.stopPropagation();
+
+                    const bookingId = this.getAttribute('data-booking-id');
+                    const modalId = `deleteModal${bookingId}`;
+                    const modal = document.getElementById(modalId);
+
+                    if (modal) {
+                        const modalInstance = new bootstrap.Modal(modal, {
+                            backdrop: 'static',
+                            keyboard: false
+                        });
+                        modalInstance.show();
+                    }
+                });
+            });
+
+            // Find all delete modals and stabilize them
+            const deleteModals = document.querySelectorAll('[id^="deleteModal"]');
+
+            deleteModals.forEach(modal => {
+                // For other modals that still use data-bs-toggle
+                const triggerButton = document.querySelector(`[data-bs-target="#${modal.id}"]`);
+                if (triggerButton && !triggerButton.classList.contains('delete-booking-btn')) {
+                    let isOpening = false;
+
+                    triggerButton.addEventListener('click', function(e) {
+                        e.preventDefault();
+                        e.stopPropagation();
+
+                        if (isOpening) return;
+
+                        isOpening = true;
+                        const modalInstance = new bootstrap.Modal(modal, {
+                            backdrop: 'static',
+                            keyboard: false
+                        });
+                        modalInstance.show();
+
+                        setTimeout(() => {
+                            isOpening = false;
+                        }, 500);
+                    });
+                }
+
+                // Handle form submission
+                const form = modal.querySelector('form');
+                if (form) {
+                    form.addEventListener('submit', function(e) {
+                        const submitButton = form.querySelector('button[type="submit"]');
+                        if (submitButton) {
+                            submitButton.disabled = true;
+                            submitButton.innerHTML = '<i class="fas fa-spinner fa-spin me-1"></i> Удаление...';
+                        }
+                    });
+                }
+
+                // Clean up on hide
+                modal.addEventListener('hidden.bs.modal', function() {
+                    const form = modal.querySelector('form');
+                    if (form) {
+                        const submitButton = form.querySelector('button[type="submit"]');
+                        if (submitButton) {
+                            submitButton.disabled = false;
+                            const originalText = submitButton.textContent.includes('бронирование') ? 'Удалить бронирование' : 'Удалить';
+                            submitButton.innerHTML = originalText;
+                        }
+                    }
+                });
+            });
+        });
     </script>
 
     @yield('scripts')

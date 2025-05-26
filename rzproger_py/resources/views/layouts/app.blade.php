@@ -43,19 +43,20 @@
             flex: 1;
         }
 
-        /* Header Styles */
+        /* Enhanced Header Styles */
         .navbar {
             padding: 0;
             height: var(--header-height);
-            transition: all 0.3s ease;
-            background: linear-gradient(to right, rgba(33, 37, 41, 0.95), rgba(107, 66, 38, 0.9)) !important;
-            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.2);
+            transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            background: linear-gradient(135deg, rgba(33, 37, 41, 0.95) 0%, rgba(107, 66, 38, 0.9) 100%) !important;
+            box-shadow: 0 4px 25px rgba(0, 0, 0, 0.15);
+            backdrop-filter: blur(10px);
         }
 
         .navbar.scrolled {
             height: var(--header-height-scrolled);
-            background: linear-gradient(to right, rgba(33, 37, 41, 0.98), rgba(107, 66, 38, 0.95)) !important;
-            box-shadow: 0 3px 20px rgba(0, 0, 0, 0.3);
+            background: linear-gradient(135deg, rgba(33, 37, 41, 0.98) 0%, rgba(107, 66, 38, 0.95) 100%) !important;
+            box-shadow: 0 6px 30px rgba(0, 0, 0, 0.25);
         }
 
         .navbar-brand {
@@ -66,46 +67,240 @@
             align-items: center;
             height: 100%;
             padding: 0;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .navbar-brand:hover {
+            transform: scale(1.05);
+            color: #fff !important;
         }
 
         .navbar-brand i {
             font-size: 2rem;
             margin-right: 12px;
+            animation: pulse 3s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+
+        .navbar-brand::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--secondary-color), #fff);
+            transition: width 0.4s ease;
+        }
+
+        .navbar-brand:hover::after {
+            width: 100%;
         }
 
         .nav-link {
             font-weight: 500;
             position: relative;
-            padding: 0 15px;
+            padding: 0 20px;
             color: rgba(255, 255, 255, 0.85) !important;
             display: flex;
             align-items: center;
             height: 100%;
+            transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            overflow: hidden;
         }
 
         .nav-link:hover, .nav-link.active {
             color: #fff !important;
+            transform: translateY(-2px);
+        }
+
+        .nav-link::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, rgba(255, 255, 255, 0.1), rgba(213, 183, 136, 0.2));
+            transform: translateX(-100%);
+            transition: transform 0.4s ease;
+        }
+
+        .nav-link:hover::before {
+            transform: translateX(0);
         }
 
         .nav-link::after {
             content: '';
             position: absolute;
             width: 0;
-            height: 3px;
-            background: var(--secondary-color);
+            height: 4px;
+            background: linear-gradient(90deg, var(--secondary-color), #fff);
             bottom: 0;
-            left: 0;
-            transition: width 0.3s;
+            left: 50%;
+            transform: translateX(-50%);
+            transition: width 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            border-radius: 2px 2px 0 0;
         }
 
         .nav-link:hover::after, .nav-link.active::after {
-            width: 100%;
+            width: 80%;
+        }
+
+        .nav-link i {
+            margin-right: 8px;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+        }
+
+        .nav-link:hover i {
+            transform: scale(1.2) rotate(5deg);
         }
 
         .nav-item {
             height: 100%;
             display: flex;
             align-items: stretch;
+            position: relative;
+        }
+
+        /* Special effects for user dropdown */
+        .nav-item.dropdown {
+            position: relative;
+        }
+
+        .nav-item.dropdown::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: -10px;
+            width: 6px;
+            height: 6px;
+            background: var(--secondary-color);
+            border-radius: 50%;
+            transform: translateY(-50%) scale(0);
+            transition: transform 0.3s ease;
+        }
+
+        .nav-item.dropdown:hover::before {
+            transform: translateY(-50%) scale(1);
+        }
+
+        /* Enhanced dropdown */
+        .dropdown-menu {
+            border: none;
+            border-radius: 12px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+            padding: 15px;
+            margin-top: 15px;
+            transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            backdrop-filter: blur(10px);
+            background: rgba(255, 255, 255, 0.95);
+            transform: translateY(-10px);
+            opacity: 0;
+        }
+
+        .dropdown-menu.show {
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        .dropdown-item {
+            padding: 12px 20px;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .dropdown-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(107, 66, 38, 0.1), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .dropdown-item:hover::before {
+            left: 100%;
+        }
+
+        .dropdown-item:hover, .dropdown-item:focus {
+            background: linear-gradient(135deg, var(--light-bg), rgba(107, 66, 38, 0.05));
+            color: var(--primary-color);
+            transform: translateX(5px);
+        }
+
+        .dropdown-item i {
+            width: 20px;
+            margin-right: 12px;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .dropdown-item:hover i {
+            transform: scale(1.2);
+            color: var(--primary-color);
+        }
+
+        /* Mobile navbar improvements */
+        @media (max-width: 991px) {
+            .navbar-collapse {
+                background: linear-gradient(135deg, rgba(33, 37, 41, 0.98), rgba(107, 66, 38, 0.95));
+                border-radius: 0 0 15px 15px;
+                padding: 20px;
+                max-height: calc(100vh - var(--header-height));
+                overflow-y: auto;
+                margin-top: 10px;
+                box-shadow: 0 5px 20px rgba(0,0,0,0.3);
+            }
+
+            .nav-item {
+                height: auto;
+                margin: 5px 0;
+            }
+
+            .nav-link {
+                padding: 15px 20px;
+                height: auto;
+                border-radius: 8px;
+                margin: 2px 0;
+            }
+
+            .nav-link::after {
+                bottom: 10px;
+                left: 20px;
+                transform: none;
+            }
+
+            .nav-link:hover::after, .nav-link.active::after {
+                width: calc(100% - 40px);
+            }
+        }
+
+        /* Add glow effect on active pages */
+        .navbar .nav-link.active {
+            position: relative;
+        }
+
+        .navbar .nav-link.active::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle, rgba(213, 183, 136, 0.2) 0%, transparent 70%);
+            transform: translate(-50%, -50%);
+            z-index: -1;
         }
 
         /* Alert Styles */
@@ -126,35 +321,6 @@
             margin-bottom: 0;
             border-radius: 0;
             box-shadow: 0 3px 10px rgba(0,0,0,0.1);
-        }
-
-        /* Breadcrumb styles */
-        .breadcrumb-container {
-            background-color: var(--light-bg);
-            padding: 15px 0;
-            box-shadow: inset 0 -1px 0 rgba(0,0,0,0.1);
-            margin-bottom: 30px;
-        }
-
-        .breadcrumb {
-            margin-bottom: 0;
-        }
-
-        .breadcrumb a {
-            color: var(--primary-color);
-            text-decoration: none;
-        }
-
-        .breadcrumb a:hover {
-            color: var(--primary-color-hover);
-            text-decoration: underline;
-        }
-
-        .breadcrumb-item + .breadcrumb-item::before {
-            font-family: "Font Awesome 5 Free";
-            font-weight: 900;
-            content: "\f105";
-            color: #6c757d;
         }
 
         /* Page title styles */
@@ -206,31 +372,57 @@
             text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.5);
         }
 
-        /* Dropdown menu styling */
+        /* Enhanced dropdown menu styling */
         .dropdown-menu {
             border: none;
-            border-radius: 8px;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.15);
-            padding: 10px;
-            margin-top: 10px;
-            transition: all 0.3s;
+            border-radius: 12px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+            padding: 15px;
+            margin-top: 15px;
+            transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            backdrop-filter: blur(10px);
+            background: rgba(255, 255, 255, 0.95);
         }
 
         .dropdown-item {
-            padding: 8px 15px;
-            border-radius: 5px;
-            transition: all 0.2s;
+            padding: 12px 20px;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .dropdown-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(107, 66, 38, 0.1), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .dropdown-item:hover::before {
+            left: 100%;
         }
 
         .dropdown-item:hover, .dropdown-item:focus {
-            background-color: var(--light-bg);
+            background: linear-gradient(135deg, var(--light-bg), rgba(107, 66, 38, 0.05));
             color: var(--primary-color);
+            transform: translateX(5px);
         }
 
         .dropdown-item i {
             width: 20px;
-            margin-right: 8px;
+            margin-right: 12px;
             text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .dropdown-item:hover i {
+            transform: scale(1.2);
+            color: var(--primary-color);
         }
 
         /* Status message styles */
@@ -516,60 +708,204 @@
             }
         }
 
-        /* Custom animation for alerts */
-        .custom-alert {
-            animation: slideIn 0.5s forwards;
-            transform: translateX(100%);
-        }
-
-        @keyframes slideIn {
-            to {
-                transform: translateX(0);
-            }
-        }
-
-        /* Custom toast notification */
-        .toast-notification {
+        /* Booking Success Notification */
+        .booking-success {
             position: fixed;
-            top: calc(var(--header-height) + 20px);
-            right: 20px;
-            z-index: 1060;
-            max-width: 350px;
-            background: white;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-            border-radius: 10px;
-            overflow: hidden;
-            opacity: 0;
-            transform: translateY(-20px);
-            animation: toastIn 0.5s forwards;
+            top: var(--header-height);
+            left: 0;
+            right: 0;
+            background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
+            color: white;
+            padding: 15px 0;
+            z-index: 1055;
+            box-shadow: 0 4px 20px rgba(40, 167, 69, 0.3);
+            transform: translateY(-100%);
+            animation: slideInTop 0.6s ease-out forwards;
+            transition: top 0.3s ease;
         }
 
-        @keyframes toastIn {
+        .scrolled .booking-success {
+            top: var(--header-height-scrolled);
+        }
+
+        @keyframes slideInTop {
+            from {
+                transform: translateY(-100%);
+            }
             to {
-                opacity: 1;
                 transform: translateY(0);
             }
         }
 
-        .toast-header {
-            background: var(--primary-color);
-            color: white;
-            padding: 12px 15px;
+        .booking-success .container {
             display: flex;
             align-items: center;
             justify-content: space-between;
         }
 
+        .booking-success i {
+            font-size: 1.2rem;
+            margin-right: 10px;
+            color: #fff;
+        }
+
+        .close-notification {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.1rem;
+            cursor: pointer;
+            padding: 5px 10px;
+            border-radius: 50%;
+            transition: all 0.3s ease;
+            opacity: 0.8;
+        }
+
+        .close-notification:hover {
+            background: rgba(255, 255, 255, 0.2);
+            opacity: 1;
+            transform: scale(1.1);
+        }
+
+        /* Toast notification improvements */
+        .toast-notification {
+            position: fixed;
+            top: calc(var(--header-height) + 20px);
+            right: 20px;
+            z-index: 1060;
+            max-width: 400px;
+            background: white;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+            border-radius: 12px;
+            overflow: hidden;
+            opacity: 0;
+            transform: translateX(100%);
+            animation: toastSlideIn 0.6s ease-out forwards;
+            border-left: 5px solid #28a745;
+        }
+
+        @keyframes toastSlideIn {
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .scrolled .toast-notification {
+            top: calc(var(--header-height-scrolled) + 20px);
+        }
+
+        .toast-header {
+            background: linear-gradient(135deg, #28a745, #20c997);
+            color: white;
+            padding: 15px 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            font-weight: 600;
+        }
+
         .toast-body {
-            padding: 15px;
+            padding: 20px;
+            font-size: 0.95rem;
+            line-height: 1.5;
         }
 
         .toast-close {
             background: transparent;
             border: none;
             color: white;
+            font-size: 1.3rem;
+            cursor: pointer;
+            padding: 0;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+
+        .toast-close:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: rotate(90deg);
+        }
+
+        /* Alternative success notification style */
+        .success-banner {
+            position: fixed;
+            top: var(--header-height);
+            left: 0;
+            right: 0;
+            background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
+            color: white;
+            padding: 20px 0;
+            z-index: 1055;
+            box-shadow: 0 5px 25px rgba(40, 167, 69, 0.4);
+            transform: translateY(-100%);
+            animation: successBannerSlide 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+        }
+
+        @keyframes successBannerSlide {
+            0% {
+                transform: translateY(-100%);
+            }
+            70% {
+                transform: translateY(10px);
+            }
+            100% {
+                transform: translateY(0);
+            }
+        }
+
+        .success-banner .success-content {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            font-size: 1.1rem;
+            font-weight: 500;
+        }
+
+        .success-banner .success-icon {
+            font-size: 1.5rem;
+            margin-right: 15px;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.1);
+            }
+            100% {
+                transform: scale(1);
+            }
+        }
+
+        .success-banner .close-success {
+            position: absolute;
+            right: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: none;
+            border: none;
+            color: white;
             font-size: 1.2rem;
             cursor: pointer;
+            padding: 8px;
+            border-radius: 50%;
+            transition: all 0.3s ease;
+            opacity: 0.9;
+        }
+
+        .success-banner .close-success:hover {
+            background: rgba(255, 255, 255, 0.2);
+            opacity: 1;
+            transform: translateY(-50%) rotate(90deg);
         }
     </style>
     @yield('styles')
@@ -646,63 +982,52 @@
         </nav>
     </header>
 
-    <!-- Status message for successful booking or other notifications -->
+    <!-- Success Banner for Booking -->
     @if(session('success') && Route::is('bookings.*'))
-    <div class="booking-success">
-        <div class="container d-flex justify-content-between align-items-center">
-            <div>
-                <i class="fas fa-check-circle"></i> {{ session('success') }}
+    <div class="success-banner" id="successBanner">
+        <div class="container">
+            <div class="success-content">
+                <i class="fas fa-check-circle success-icon"></i>
+                <span>{{ session('success') }}</span>
             </div>
-            <button type="button" class="close-notification" onclick="this.parentElement.parentElement.style.display='none';">
+            <button type="button" class="close-success" onclick="closeSuccessBanner()">
                 <i class="fas fa-times"></i>
             </button>
         </div>
     </div>
     @endif
 
-    <!-- Status message for other notifications -->
+    <!-- Toast Notifications for other messages -->
     @if((session('success') && !Route::is('bookings.*')) || session('error'))
-    <div class="status-message">
         @if(session('success') && !Route::is('bookings.*'))
-        <div class="alert alert-success alert-dismissible fade show custom-alert" role="alert">
-            <i class="fas fa-check-circle me-2"></i> {{ session('success') }}
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        <div class="toast-notification" id="successToast">
+            <div class="toast-header">
+                <i class="fas fa-check-circle me-2"></i>
+                <strong>Успешно!</strong>
+                <button type="button" class="toast-close" onclick="closeToast('successToast')">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="toast-body">
+                {{ session('success') }}
+            </div>
         </div>
         @endif
 
         @if(session('error'))
-        <div class="alert alert-danger alert-dismissible fade show custom-alert" role="alert">
-            <i class="fas fa-exclamation-circle me-2"></i> {{ session('error') }}
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        <div class="toast-notification" id="errorToast" style="border-left-color: #dc3545;">
+            <div class="toast-header" style="background: linear-gradient(135deg, #dc3545, #c82333);">
+                <i class="fas fa-exclamation-circle me-2"></i>
+                <strong>Ошибка!</strong>
+                <button type="button" class="toast-close" onclick="closeToast('errorToast')">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="toast-body">
+                {{ session('error') }}
+            </div>
         </div>
         @endif
-    </div>
-    @endif
-
-    <!-- Breadcrumbs for inner pages -->
-    @if(!Route::is('home'))
-    <div class="breadcrumb-container">
-        <div class="container">
-            <nav aria-label="breadcrumb">
-                <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="{{ route('home') }}"><i class="fas fa-home me-1"></i>Главная</a></li>
-                    @yield('breadcrumbs')
-                    @if(Route::is('bookings.index'))
-                    <li class="breadcrumb-item active" aria-current="page">Мои бронирования</li>
-                    @elseif(Route::is('rooms.index'))
-                    <li class="breadcrumb-item active" aria-current="page">Номера</li>
-                    @elseif(Route::is('about'))
-                    <li class="breadcrumb-item active" aria-current="page">О нас</li>
-                    @elseif(Route::is('contact'))
-                    <li class="breadcrumb-item active" aria-current="page">Контакты</li>
-                    @elseif(Route::is('bookings.show'))
-                    <li class="breadcrumb-item"><a href="{{ route('bookings.index') }}">Мои бронирования</a></li>
-                    <li class="breadcrumb-item active" aria-current="page">Бронирование #{{ request()->route('booking')->id }}</li>
-                    @endif
-                </ol>
-            </nav>
-        </div>
-    </div>
     @endif
 
     <main class="main-content">
@@ -779,22 +1104,155 @@
                 once: true
             });
 
+        // Function to close success banner
+        function closeSuccessBanner() {
+            const banner = document.getElementById('successBanner');
+            if (banner) {
+                banner.style.animation = 'successBannerSlideOut 0.5s ease-in forwards';
+                setTimeout(function() {
+                    banner.remove();
+                    // Reset body padding
+                    document.body.style.paddingTop = 'var(--header-height)';
+                }, 500);
+            }
+        }
+
+        // Function to close toast notifications
+        function closeToast(toastId) {
+            const toast = document.getElementById(toastId);
+            if (toast) {
+                toast.style.animation = 'toastSlideOut 0.4s ease-in forwards';
+                setTimeout(function() {
+                    toast.remove();
+                }, 400);
+            }
+        }
+
+        // Auto-hide toast notifications and enhanced effects
+        document.addEventListener('DOMContentLoaded', function() {
+            const toasts = document.querySelectorAll('.toast-notification');
+            toasts.forEach(function(toast) {
+                setTimeout(function() {
+                    if (toast.id === 'successToast') {
+                        closeToast('successToast');
+                    } else if (toast.id === 'errorToast') {
+                        closeToast('errorToast');
+                    }
+                }, 6000); // Auto-hide after 6 seconds
+            });
+
+            // Enhanced dropdown animations
+            const dropdownToggles = document.querySelectorAll('.dropdown-toggle');
+            dropdownToggles.forEach(function(toggle) {
+                toggle.addEventListener('shown.bs.dropdown', function() {
+                    const dropdownMenu = this.nextElementSibling;
+                    if (dropdownMenu) {
+                        dropdownMenu.style.animation = 'dropdownFadeIn 0.4s ease-out forwards';
+                    }
+                });
+            });
+
+            // Add interactive hover effects to nav links
+            const navLinks = document.querySelectorAll('.nav-link');
+            navLinks.forEach(function(link) {
+                link.addEventListener('mouseenter', function() {
+                    if (!this.parentElement.classList.contains('dropdown')) {
+                        this.style.transform = 'translateY(-2px) scale(1.02)';
+                    }
+                });
+
+                link.addEventListener('mouseleave', function() {
+                    if (!this.classList.contains('active') && !this.parentElement.classList.contains('dropdown')) {
+                        this.style.transform = 'translateY(0) scale(1)';
+                    }
+                });
+            });
+        });
+
             // Navbar scroll effect
             window.addEventListener('scroll', function() {
                 const navbar = document.querySelector('.navbar');
                 const body = document.body;
                 const statusMessage = document.querySelector('.status-message');
+                const successBanner = document.querySelector('.success-banner');
 
                 if (window.scrollY > 50) {
                     navbar.classList.add('scrolled');
                     body.classList.add('scrolled');
                     if (statusMessage) statusMessage.classList.add('scrolled');
+                    if (successBanner) successBanner.classList.add('scrolled');
                 } else {
                     navbar.classList.remove('scrolled');
                     body.classList.remove('scrolled');
                     if (statusMessage) statusMessage.classList.remove('scrolled');
+                    if (successBanner) successBanner.classList.remove('scrolled');
                 }
             });
+
+        // Function to close success banner
+        function closeSuccessBanner() {
+            const banner = document.getElementById('successBanner');
+            if (banner) {
+                banner.style.animation = 'successBannerSlideOut 0.5s ease-in forwards';
+                setTimeout(function() {
+                    banner.remove();
+                    // Reset body padding
+                    document.body.style.paddingTop = 'var(--header-height)';
+                }, 500);
+            }
+        }
+
+        // Function to close toast notifications
+        function closeToast(toastId) {
+            const toast = document.getElementById(toastId);
+            if (toast) {
+                toast.style.animation = 'toastSlideOut 0.4s ease-in forwards';
+                setTimeout(function() {
+                    toast.remove();
+                }, 400);
+            }
+        }
+
+        // Auto-hide toast notifications and enhanced effects
+        document.addEventListener('DOMContentLoaded', function() {
+            const toasts = document.querySelectorAll('.toast-notification');
+            toasts.forEach(function(toast) {
+                setTimeout(function() {
+                    if (toast.id === 'successToast') {
+                        closeToast('successToast');
+                    } else if (toast.id === 'errorToast') {
+                        closeToast('errorToast');
+                    }
+                }, 6000); // Auto-hide after 6 seconds
+            });
+
+            // Enhanced dropdown animations
+            const dropdownToggles = document.querySelectorAll('.dropdown-toggle');
+            dropdownToggles.forEach(function(toggle) {
+                toggle.addEventListener('shown.bs.dropdown', function() {
+                    const dropdownMenu = this.nextElementSibling;
+                    if (dropdownMenu) {
+                        dropdownMenu.style.animation = 'dropdownFadeIn 0.4s ease-out forwards';
+                    }
+                });
+            });
+
+            // Add interactive hover effects to nav links
+            const navLinks = document.querySelectorAll('.nav-link');
+            navLinks.forEach(function(link) {
+                link.addEventListener('mouseenter', function() {
+                    if (!this.parentElement.classList.contains('dropdown')) {
+                        this.style.transform = 'translateY(-2px) scale(1.02)';
+                    }
+                });
+
+                link.addEventListener('mouseleave', function() {
+                    if (!this.classList.contains('active') && !this.parentElement.classList.contains('dropdown')) {
+                        this.style.transform = 'translateY(0) scale(1)';
+                    }
+                });
+            });
+        });
 
             // Auto-dismiss alerts after 5 seconds
             setTimeout(function() {
@@ -803,8 +1261,359 @@
                     const bsAlert = new bootstrap.Alert(alert);
                     bsAlert.close();
                 });
-            }, 5000);
+
+        // Function to close success banner
+        function closeSuccessBanner() {
+            const banner = document.getElementById('successBanner');
+            if (banner) {
+                banner.style.animation = 'successBannerSlideOut 0.5s ease-in forwards';
+                setTimeout(function() {
+                    banner.remove();
+                    // Reset body padding
+                    document.body.style.paddingTop = 'var(--header-height)';
+                }, 500);
+            }
+        }
+
+        // Function to close toast notifications
+        function closeToast(toastId) {
+            const toast = document.getElementById(toastId);
+            if (toast) {
+                toast.style.animation = 'toastSlideOut 0.4s ease-in forwards';
+                setTimeout(function() {
+                    toast.remove();
+                }, 400);
+            }
+        }
+
+        // Auto-hide toast notifications and enhanced effects
+        document.addEventListener('DOMContentLoaded', function() {
+            const toasts = document.querySelectorAll('.toast-notification');
+            toasts.forEach(function(toast) {
+                setTimeout(function() {
+                    if (toast.id === 'successToast') {
+                        closeToast('successToast');
+                    } else if (toast.id === 'errorToast') {
+                        closeToast('errorToast');
+                    }
+                }, 6000); // Auto-hide after 6 seconds
+            });
+
+            // Enhanced dropdown animations
+            const dropdownToggles = document.querySelectorAll('.dropdown-toggle');
+            dropdownToggles.forEach(function(toggle) {
+                toggle.addEventListener('shown.bs.dropdown', function() {
+                    const dropdownMenu = this.nextElementSibling;
+                    if (dropdownMenu) {
+                        dropdownMenu.style.animation = 'dropdownFadeIn 0.4s ease-out forwards';
+                    }
+                });
+            });
+
+            // Add interactive hover effects to nav links
+            const navLinks = document.querySelectorAll('.nav-link');
+            navLinks.forEach(function(link) {
+                link.addEventListener('mouseenter', function() {
+                    if (!this.parentElement.classList.contains('dropdown')) {
+                        this.style.transform = 'translateY(-2px) scale(1.02)';
+                    }
+                });
+
+                link.addEventListener('mouseleave', function() {
+                    if (!this.classList.contains('active') && !this.parentElement.classList.contains('dropdown')) {
+                        this.style.transform = 'translateY(0) scale(1)';
+                    }
+                });
+            });
         });
+            }, 5000);
+
+            // Auto-hide success banner after 7 seconds
+            const successBanner = document.getElementById('successBanner');
+            if (successBanner) {
+                setTimeout(function() {
+                    closeSuccessBanner();
+                }, 7000);
+
+                // Add scroll adjustment for content
+                document.body.style.paddingTop = (parseInt(getComputedStyle(document.body).paddingTop) + successBanner.offsetHeight) + 'px';
+            }
+        });
+
+        // Function to close success banner
+        function closeSuccessBanner() {
+            const banner = document.getElementById('successBanner');
+            if (banner) {
+                banner.style.animation = 'successBannerSlideOut 0.5s ease-in forwards';
+                setTimeout(function() {
+                    banner.remove();
+                    // Reset body padding
+                    document.body.style.paddingTop = 'var(--header-height)';
+                }, 500);
+            }
+        }
+
+        // Function to close toast notifications
+        function closeToast(toastId) {
+            const toast = document.getElementById(toastId);
+            if (toast) {
+                toast.style.animation = 'toastSlideOut 0.4s ease-in forwards';
+                setTimeout(function() {
+                    toast.remove();
+                }, 400);
+            }
+        }
+
+        // Auto-hide toast notifications and enhanced effects
+        document.addEventListener('DOMContentLoaded', function() {
+            const toasts = document.querySelectorAll('.toast-notification');
+            toasts.forEach(function(toast) {
+                setTimeout(function() {
+                    if (toast.id === 'successToast') {
+                        closeToast('successToast');
+                    } else if (toast.id === 'errorToast') {
+                        closeToast('errorToast');
+                    }
+                }, 6000); // Auto-hide after 6 seconds
+            });
+
+            // Enhanced dropdown animations
+            const dropdownToggles = document.querySelectorAll('.dropdown-toggle');
+            dropdownToggles.forEach(function(toggle) {
+                toggle.addEventListener('shown.bs.dropdown', function() {
+                    const dropdownMenu = this.nextElementSibling;
+                    if (dropdownMenu) {
+                        dropdownMenu.style.animation = 'dropdownFadeIn 0.4s ease-out forwards';
+                    }
+                });
+            });
+
+            // Add interactive hover effects to nav links
+            const navLinks = document.querySelectorAll('.nav-link');
+            navLinks.forEach(function(link) {
+                link.addEventListener('mouseenter', function() {
+                    if (!this.parentElement.classList.contains('dropdown')) {
+                        this.style.transform = 'translateY(-2px) scale(1.02)';
+                    }
+                });
+
+                link.addEventListener('mouseleave', function() {
+                    if (!this.classList.contains('active') && !this.parentElement.classList.contains('dropdown')) {
+                        this.style.transform = 'translateY(0) scale(1)';
+                    }
+                });
+            });
+        });
+
+        // Function to close success banner
+        function closeSuccessBanner() {
+            const banner = document.getElementById('successBanner');
+            if (banner) {
+                banner.style.animation = 'successBannerSlideOut 0.5s ease-in forwards';
+                setTimeout(function() {
+                    banner.remove();
+                    // Reset body padding
+                    document.body.style.paddingTop = 'var(--header-height)';
+                }, 500);
+            }
+        }
+
+        // Function to close toast notifications
+        function closeToast(toastId) {
+            const toast = document.getElementById(toastId);
+            if (toast) {
+                toast.style.animation = 'toastSlideOut 0.4s ease-in forwards';
+                setTimeout(function() {
+                    toast.remove();
+                }, 400);
+            }
+        }
+
+        // Auto-hide toast notifications
+        document.addEventListener('DOMContentLoaded', function() {
+            const toasts = document.querySelectorAll('.toast-notification');
+            toasts.forEach(function(toast) {
+                setTimeout(function() {
+                    if (toast.id === 'successToast') {
+                        closeToast('successToast');
+                    } else if (toast.id === 'errorToast') {
+                        closeToast('errorToast');
+                    }
+                }, 6000); // Auto-hide after 6 seconds
+            });
+
+        // Function to close success banner
+        function closeSuccessBanner() {
+            const banner = document.getElementById('successBanner');
+            if (banner) {
+                banner.style.animation = 'successBannerSlideOut 0.5s ease-in forwards';
+                setTimeout(function() {
+                    banner.remove();
+                    // Reset body padding
+                    document.body.style.paddingTop = 'var(--header-height)';
+                }, 500);
+            }
+        }
+
+        // Function to close toast notifications
+        function closeToast(toastId) {
+            const toast = document.getElementById(toastId);
+            if (toast) {
+                toast.style.animation = 'toastSlideOut 0.4s ease-in forwards';
+                setTimeout(function() {
+                    toast.remove();
+                }, 400);
+            }
+        }
+
+        // Auto-hide toast notifications and enhanced effects
+        document.addEventListener('DOMContentLoaded', function() {
+            const toasts = document.querySelectorAll('.toast-notification');
+            toasts.forEach(function(toast) {
+                setTimeout(function() {
+                    if (toast.id === 'successToast') {
+                        closeToast('successToast');
+                    } else if (toast.id === 'errorToast') {
+                        closeToast('errorToast');
+                    }
+                }, 6000); // Auto-hide after 6 seconds
+            });
+
+            // Enhanced dropdown animations
+            const dropdownToggles = document.querySelectorAll('.dropdown-toggle');
+            dropdownToggles.forEach(function(toggle) {
+                toggle.addEventListener('shown.bs.dropdown', function() {
+                    const dropdownMenu = this.nextElementSibling;
+                    if (dropdownMenu) {
+                        dropdownMenu.style.animation = 'dropdownFadeIn 0.4s ease-out forwards';
+                    }
+                });
+            });
+
+            // Add interactive hover effects to nav links
+            const navLinks = document.querySelectorAll('.nav-link');
+            navLinks.forEach(function(link) {
+                link.addEventListener('mouseenter', function() {
+                    if (!this.parentElement.classList.contains('dropdown')) {
+                        this.style.transform = 'translateY(-2px) scale(1.02)';
+                    }
+                });
+
+                link.addEventListener('mouseleave', function() {
+                    if (!this.classList.contains('active') && !this.parentElement.classList.contains('dropdown')) {
+                        this.style.transform = 'translateY(0) scale(1)';
+                    }
+                });
+            });
+        });
+        });
+
+        // Function to close success banner
+        function closeSuccessBanner() {
+            const banner = document.getElementById('successBanner');
+            if (banner) {
+                banner.style.animation = 'successBannerSlideOut 0.5s ease-in forwards';
+                setTimeout(function() {
+                    banner.remove();
+                    // Reset body padding
+                    document.body.style.paddingTop = 'var(--header-height)';
+                }, 500);
+            }
+        }
+
+        // Function to close toast notifications
+        function closeToast(toastId) {
+            const toast = document.getElementById(toastId);
+            if (toast) {
+                toast.style.animation = 'toastSlideOut 0.4s ease-in forwards';
+                setTimeout(function() {
+                    toast.remove();
+                }, 400);
+            }
+        }
+
+        // Auto-hide toast notifications and enhanced effects
+        document.addEventListener('DOMContentLoaded', function() {
+            const toasts = document.querySelectorAll('.toast-notification');
+            toasts.forEach(function(toast) {
+                setTimeout(function() {
+                    if (toast.id === 'successToast') {
+                        closeToast('successToast');
+                    } else if (toast.id === 'errorToast') {
+                        closeToast('errorToast');
+                    }
+                }, 6000); // Auto-hide after 6 seconds
+            });
+
+            // Enhanced dropdown animations
+            const dropdownToggles = document.querySelectorAll('.dropdown-toggle');
+            dropdownToggles.forEach(function(toggle) {
+                toggle.addEventListener('shown.bs.dropdown', function() {
+                    const dropdownMenu = this.nextElementSibling;
+                    if (dropdownMenu) {
+                        dropdownMenu.style.animation = 'dropdownFadeIn 0.4s ease-out forwards';
+                    }
+                });
+            });
+
+            // Add interactive hover effects to nav links
+            const navLinks = document.querySelectorAll('.nav-link');
+            navLinks.forEach(function(link) {
+                link.addEventListener('mouseenter', function() {
+                    if (!this.parentElement.classList.contains('dropdown')) {
+                        this.style.transform = 'translateY(-2px) scale(1.02)';
+                    }
+                });
+
+                link.addEventListener('mouseleave', function() {
+                    if (!this.classList.contains('active') && !this.parentElement.classList.contains('dropdown')) {
+                        this.style.transform = 'translateY(0) scale(1)';
+                    }
+                });
+            });
+        });
+
+        // Add CSS for slide out animation
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes successBannerSlideOut {
+                0% {
+                    transform: translateY(0);
+                    opacity: 1;
+                }
+                100% {
+                    transform: translateY(-100%);
+                    opacity: 0;
+                }
+            }
+
+            @keyframes toastSlideOut {
+                0% {
+                    transform: translateX(0);
+                    opacity: 1;
+                }
+                100% {
+                    transform: translateX(100%);
+                    opacity: 0;
+                }
+            }
+
+            @keyframes dropdownFadeIn {
+                0% {
+                    opacity: 0;
+                    transform: translateY(-10px) scale(0.95);
+                }
+                100% {
+                    opacity: 1;
+                    transform: translateY(0) scale(1);
+                }
+            }
+
+            .scrolled .success-banner {
+                top: var(--header-height-scrolled);
+            }
+        `;
+        document.head.appendChild(style);
     </script>
     @yield('scripts')
 </body>

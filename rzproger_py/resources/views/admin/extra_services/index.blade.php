@@ -54,14 +54,16 @@
                                                         </div>
                                                     @endif
                                                 </div>
+                                                @if($service->bookings()->count() == 0)
+                                                    <form id="deleteForm{{ $service->id }}" action="{{ route('admin.extra-services.destroy', $service) }}" method="POST">
+                                                        @csrf
+                                                        @method('DELETE')
+                                                    </form>
+                                                @endif
                                                 <div class="modal-footer">
                                                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Отмена</button>
                                                     @if($service->bookings()->count() == 0)
-                                                        <form action="{{ route('admin.extra-services.destroy', $service) }}" method="POST">
-                                                            @csrf
-                                                            @method('DELETE')
-                                                            <button type="submit" class="btn btn-danger">Удалить</button>
-                                                        </form>
+                                                        <button type="submit" form="deleteForm{{ $service->id }}" class="btn btn-danger">Удалить</button>
                                                     @endif
                                                 </div>
                                             </div>

@@ -2,10 +2,6 @@
 
 @section('title', 'Мои бронирования')
 
-@section('breadcrumbs')
-    <li class="breadcrumb-item active" aria-current="page">Мои бронирования</li>
-@endsection
-
 @section('content')
 <div class="page-title">
     <div class="container">
