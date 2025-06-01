@@ -267,6 +267,50 @@
                         </a>
                     </div>
                 </div>
+
+                <!-- Вторая строка быстрых действий -->
+                <div class="row">
+                    <div class="col-lg-3 col-md-6 mb-3">
+                        <a href="{{ route('admin.reports.index') }}" class="quick-action-btn">
+                            <div class="quick-action-icon bg-danger">
+                                <i class="fas fa-chart-bar"></i>
+                            </div>
+                            <div class="quick-action-text">
+                                <span>Отчеты и аналитика</span>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="col-lg-3 col-md-6 mb-3">
+                        <a href="{{ route('admin.analytics.dashboard') }}" class="quick-action-btn">
+                            <div class="quick-action-icon bg-dark">
+                                <i class="fas fa-tachometer-alt"></i>
+                            </div>
+                            <div class="quick-action-text">
+                                <span>Дашборд аналитики</span>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="col-lg-3 col-md-6 mb-3">
+                        <a href="{{ route('admin.reports.create') }}" class="quick-action-btn">
+                            <div class="quick-action-icon bg-secondary">
+                                <i class="fas fa-plus-circle"></i>
+                            </div>
+                            <div class="quick-action-text">
+                                <span>Создать отчет</span>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="col-lg-3 col-md-6 mb-3">
+                        <a href="{{ route('admin.bookings.index') }}?status=confirmed" class="quick-action-btn">
+                            <div class="quick-action-icon bg-success">
+                                <i class="fas fa-check-circle"></i>
+                            </div>
+                            <div class="quick-action-text">
+                                <span>Активные брони</span>
+                            </div>
+                        </a>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

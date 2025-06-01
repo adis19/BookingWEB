@@ -11,6 +11,7 @@ use App\Http\Controllers\Admin\RoomController as AdminRoomController;
 use App\Http\Controllers\Admin\BookingController as AdminBookingController;
 use App\Http\Controllers\Admin\ExtraServiceController;
 use App\Http\Controllers\Auth\GoogleController;
+use App\Http\Controllers\Admin\ReportController;
 
 /*
 |--------------------------------------------------------------------------
@@ -89,6 +90,16 @@ Route::prefix('admin')->middleware(['auth', 'admin'])->name('admin.')->group(fun
     Route::get('/extra-services/{extraService}/edit', [ExtraServiceController::class, 'edit'])->name('extra-services.edit');
     Route::put('/extra-services/{extraService}', [ExtraServiceController::class, 'update'])->name('extra-services.update');
     Route::delete('/extra-services/{extraService}', [ExtraServiceController::class, 'destroy'])->name('extra-services.destroy');
+
+    // Reports Management
+    Route::get('/reports', [ReportController::class, 'index'])->name('reports.index');
+    Route::get('/reports/create', [ReportController::class, 'create'])->name('reports.create');
+    Route::post('/reports', [ReportController::class, 'store'])->name('reports.store');
+    Route::get('/reports/{report}', [ReportController::class, 'show'])->name('reports.show');
+    Route::delete('/reports/{report}', [ReportController::class, 'destroy'])->name('reports.destroy');
+    Route::get('/reports/{report}/export', [ReportController::class, 'export'])->name('reports.export');
+    Route::get('/analytics/dashboard', [ReportController::class, 'dashboard'])->name('analytics.dashboard');
+    Route::post('/reports/quick', [ReportController::class, 'quickReport'])->name('reports.quick');
 });
 
 // Debug routes

@@ -1006,6 +1006,26 @@
 
         <div class="sidebar-divider"></div>
 
+        <div class="sidebar-heading">Аналитика</div>
+
+        <ul class="nav-sidebar">
+            <li class="nav-item">
+                <a class="nav-link {{ Route::is('admin.reports.*') ? 'active' : '' }}" href="{{ route('admin.reports.index') }}">
+                    <i class="fas fa-fw fa-chart-bar"></i>
+                    <span>Отчеты</span>
+                </a>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link {{ Route::is('admin.analytics.*') ? 'active' : '' }}" href="{{ route('admin.analytics.dashboard') }}">
+                    <i class="fas fa-fw fa-tachometer-alt"></i>
+                    <span>Дашборд аналитики</span>
+                </a>
+            </li>
+        </ul>
+
+        <div class="sidebar-divider"></div>
+
         <div class="sidebar-heading">Дополнительно</div>
 
         <ul class="nav-sidebar">
