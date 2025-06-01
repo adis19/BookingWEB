@@ -120,6 +120,12 @@
       <path value="$PROJECT_DIR$/rzproger_py/vendor/laravel/sanctum" />
       <path value="$PROJECT_DIR$/rzproger_py/vendor/laravel/serializable-closure" />
       <path value="$PROJECT_DIR$/rzproger_py/vendor/laravel/tinker" />
+      <path value="$PROJECT_DIR$/rzproger_py/vendor/firebase/php-jwt" />
+      <path value="$PROJECT_DIR$/rzproger_py/vendor/paragonie/constant_time_encoding" />
+      <path value="$PROJECT_DIR$/rzproger_py/vendor/paragonie/random_compat" />
+      <path value="$PROJECT_DIR$/rzproger_py/vendor/league/oauth1-client" />
+      <path value="$PROJECT_DIR$/rzproger_py/vendor/laravel/socialite" />
+      <path value="$PROJECT_DIR$/rzproger_py/vendor/phpseclib/phpseclib" />
     </include_path>
   </component>
   <component name="PhpProjectSharedConfiguration" php_language_level="7.3" />

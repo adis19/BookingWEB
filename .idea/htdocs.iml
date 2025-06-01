@@ -116,6 +116,12 @@
       <excludeFolder url="file://$MODULE_DIR$/rzproger_py/vendor/vlucas/phpdotenv" />
       <excludeFolder url="file://$MODULE_DIR$/rzproger_py/vendor/voku/portable-ascii" />
       <excludeFolder url="file://$MODULE_DIR$/rzproger_py/vendor/webmozart/assert" />
+      <excludeFolder url="file://$MODULE_DIR$/rzproger_py/vendor/firebase/php-jwt" />
+      <excludeFolder url="file://$MODULE_DIR$/rzproger_py/vendor/laravel/socialite" />
+      <excludeFolder url="file://$MODULE_DIR$/rzproger_py/vendor/league/oauth1-client" />
+      <excludeFolder url="file://$MODULE_DIR$/rzproger_py/vendor/paragonie/constant_time_encoding" />
+      <excludeFolder url="file://$MODULE_DIR$/rzproger_py/vendor/paragonie/random_compat" />
+      <excludeFolder url="file://$MODULE_DIR$/rzproger_py/vendor/phpseclib/phpseclib" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />

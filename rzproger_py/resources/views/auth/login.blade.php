@@ -46,6 +46,19 @@
                         </button>
                     </div>
                 </form>
+
+                <!-- Разделитель -->
+                <div class="text-center my-3">
+                    <span class="text-muted">или</span>
+                </div>
+
+                <!-- Google OAuth кнопка -->
+                <div class="d-grid">
+                    <a href="{{ route('auth.google') }}" class="btn btn-outline-danger">
+                        <i class="fab fa-google me-2"></i>
+                        Войти через Google
+                    </a>
+                </div>
             </div>
             <div class="card-footer text-center">
                 <p class="mb-0">Еще нет аккаунта? <a href="{{ route('register') }}">Зарегистрироваться</a></p>
